@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-08-05T11:37:06.620734" rpa="false" schemaversion="5">
+<suite id="s1" name="Users Api" source="c:\robot-expandtesting_UI_and_API\tests\api\users_api.robot">
+<test id="s1-t1" name="Creates a new user account via API" line="14">
+<kw name="Credit Card Number" owner="FakerLibrary">
+<msg time="2024-08-05T11:37:07.796885" level="INFO">${bypassParalelismNumber} = 2354941043905259</msg>
+<var>${bypassParalelismNumber}</var>
+<doc>Generate a valid credit card number.</doc>
+<status status="PASS" start="2024-08-05T11:37:07.796885" elapsed="0.015631"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2024-08-05T11:37:07.812516" level="INFO">${user_email} = jerrylee@example.org</msg>
+<var>${user_email}</var>
+<status status="PASS" start="2024-08-05T11:37:07.812516" elapsed="0.000000"/>
+</kw>
+<kw name="Name" owner="FakerLibrary">
+<msg time="2024-08-05T11:37:07.817381" level="INFO">${user_name} = Denise Farmer</msg>
+<var>${user_name}</var>
+<doc>:example: 'John Doe'</doc>
+<status status="PASS" start="2024-08-05T11:37:07.817381" elapsed="0.001033"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2024-08-05T11:37:07.819418" level="INFO">${user_password} = 8O#4TZk*(#</msg>
+<var>${user_password}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2024-08-05T11:37:07.818414" elapsed="0.001004"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-08-05T11:37:07.821421" level="INFO">${data} = {'email': 'jerrylee@example.org', 'name': 'Denise Farmer', 'password': '8O#4TZk*(#'}</msg>
+<var>${data}</var>
+<arg>email=${user_email}</arg>
+<arg>name=${user_name}</arg>
+<arg>password=${user_password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-08-05T11:37:07.820420" elapsed="0.001001"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:07.822426" level="INFO">Creating Session using : alias=expandtesting, url=https://practice.expandtesting.com/notes/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=expandtesting</arg>
+<arg>url=https://practice.expandtesting.com/notes/api</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-08-05T11:37:07.822426" elapsed="0.000999"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:08.284864" level="INFO">POST Request : url=https://practice.expandtesting.com/notes/api/users/register 
+ path_url=/notes/api/users/register 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '75', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=jerrylee%40example.org&amp;name=Denise+Farmer&amp;password=8O%234TZk%2A%28%23 
+ </msg>
+<msg time="2024-08-05T11:37:08.284864" level="INFO">POST Response : url=https://practice.expandtesting.com/notes/api/users/register 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"aa-NUFhBQg8lhcNBUGZc/Mc+WQa+Ag"', 'set-cookie': 'express:sess=eyJmbGFzaCI6e319; path=/; httponly, express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0; path=/; httponly', 'date': 'Mon, 05 Aug 2024 09:37:08 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
+ body={"success":true,"status":201,"message":"User account created successfully","data":{"id":"66b09d449387f7014a54bab1","name":"Denise Farmer","email":"jerrylee@example.org"}} 
+ </msg>
+<msg time="2024-08-05T11:37:08.284864" level="INFO">${responseCU} = &lt;Response [201]&gt;</msg>
+<var>${responseCU}</var>
+<arg>alias=expandtesting</arg>
+<arg>url=/users/register</arg>
+<arg>data=${data}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-08-05T11:37:07.823425" elapsed="0.461439"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.284864" level="INFO">${json_responseCU} = {'success': True, 'status': 201, 'message': 'User account created successfully', 'data': {'id': '66b09d449387f7014a54bab1', 'name': 'Denise Farmer', 'email': 'jerrylee@example.org'}}</msg>
+<var>${json_responseCU}</var>
+<arg>${responseCU.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2024-08-05T11:37:08.284864" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.318191" level="INFO">${user_email_ob} = ['jerrylee@example.org']</msg>
+<var>${user_email_ob}</var>
+<arg>${json_responseCU}</arg>
+<arg>data.email</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.284864" elapsed="0.033327"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.318191" level="INFO">${user_email_str} = ["jerrylee@example.org"]</msg>
+<var>${user_email_str}</var>
+<arg>${user_email_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.318191" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.318191" level="INFO">${user_email_rsp} = jerrylee@example.org</msg>
+<var>${user_email_rsp}</var>
+<arg>${user_email_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.318191" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.360628" level="INFO">${user_name_ob} = ['Denise Farmer']</msg>
+<var>${user_name_ob}</var>
+<arg>${json_responseCU}</arg>
+<arg>data.name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.318191" elapsed="0.042437"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.360628" level="INFO">${user_name_str} = ["Denise Farmer"]</msg>
+<var>${user_name_str}</var>
+<arg>${user_name_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.360628" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.369001" level="INFO">${user_name_rsp} = Denise Farmer</msg>
+<var>${user_name_rsp}</var>
+<arg>${user_name_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.367993" elapsed="0.001008"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user_email}</arg>
+<arg>${user_email_rsp}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.370012" elapsed="0.000988"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user_name}</arg>
+<arg>${user_name_rsp}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.372000" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>User account created successfully</arg>
+<arg>${responseCU.json()['message']}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.373002" elapsed="0.001002"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.407526" level="INFO">${user_id_ob} = ['66b09d449387f7014a54bab1']</msg>
+<var>${user_id_ob}</var>
+<arg>${json_responseCU}</arg>
+<arg>data.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.374004" elapsed="0.033522"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.409520" level="INFO">${user_id_str} = ["66b09d449387f7014a54bab1"]</msg>
+<var>${user_id_str}</var>
+<arg>${user_id_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.409520" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.410523" level="INFO">${user_id} = 66b09d449387f7014a54bab1</msg>
+<var>${user_id}</var>
+<arg>${user_id_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.410523" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${responseCU.json()['message']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.411521" elapsed="0.001648"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-08-05T11:37:08.418997" level="INFO" html="true">Created file '&lt;a href="file://C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json"&gt;C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json&lt;/a&gt;'.</msg>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<arg>{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.413169" elapsed="0.005828"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.435149" level="INFO">${data} = {'user_email': 'jerrylee@example.org', 'user_id': '66b09d449387f7014a54bab1', 'user_name': 'Denise Farmer', 'user_password': '8O#4TZk*(#'}</msg>
+<var>${data}</var>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.421009" elapsed="0.014140"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.499754" level="INFO">${user_email_data} = ['jerrylee@example.org']</msg>
+<var>${user_email_data}</var>
+<arg>${data}</arg>
+<arg>$.user_email</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.435149" elapsed="0.064605"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.499754" level="INFO">${user_email_str} = ["jerrylee@example.org"]</msg>
+<var>${user_email_str}</var>
+<arg>${user_email_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.499754" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.499754" level="INFO">${user_email} = jerrylee@example.org</msg>
+<var>${user_email}</var>
+<arg>${user_email_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.499754" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.548263" level="INFO">${user_id_data} = ['66b09d449387f7014a54bab1']</msg>
+<var>${user_id_data}</var>
+<arg>${data}</arg>
+<arg>$.user_id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.515380" elapsed="0.032883"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.548263" level="INFO">${user_id_str} = ["66b09d449387f7014a54bab1"]</msg>
+<var>${user_id_str}</var>
+<arg>${user_id_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.548263" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.553620" level="INFO">${user_id} = 66b09d449387f7014a54bab1</msg>
+<var>${user_id}</var>
+<arg>${user_id_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.551769" elapsed="0.001851"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.593399" level="INFO">${user_name_data} = ['Denise Farmer']</msg>
+<var>${user_name_data}</var>
+<arg>${data}</arg>
+<arg>$.user_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.554601" elapsed="0.038798"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.593399" level="INFO">${user_name_str} = ["Denise Farmer"]</msg>
+<var>${user_name_str}</var>
+<arg>${user_name_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.593399" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.593399" level="INFO">${user_name} = Denise Farmer</msg>
+<var>${user_name}</var>
+<arg>${user_name_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.593399" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.620684" level="INFO">${user_password_data} = ['8O#4TZk*(#']</msg>
+<var>${user_password_data}</var>
+<arg>${data}</arg>
+<arg>$.user_password</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:08.601477" elapsed="0.019207"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:08.620684" level="INFO">${user_password_str} = ["8O#4TZk*(#"]</msg>
+<var>${user_password_str}</var>
+<arg>${user_password_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:08.620684" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:08.636364" level="INFO">${user_password} = 8O#4TZk*(#</msg>
+<var>${user_password}</var>
+<arg>${user_password_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.620684" elapsed="0.018914"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-08-05T11:37:08.641607" level="INFO">${data} = {'email': 'jerrylee@example.org', 'password': '8O#4TZk*(#'}</msg>
+<var>${data}</var>
+<arg>email=${user_email}</arg>
+<arg>password=${user_password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.640620" elapsed="0.000987"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-08-05T11:37:08.642609" level="INFO">${header} = {'content-type': 'application/json; charset=utf-8'}</msg>
+<var>${header}</var>
+<arg>content-type=application/json; charset=utf-8</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.641607" elapsed="0.001002"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:08.643761" level="INFO">Creating Session using : alias=expandtesting, url=https://practice.expandtesting.com/notes/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=expandtesting</arg>
+<arg>url=https://practice.expandtesting.com/notes/api</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-08-05T11:37:08.643761" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:09.126105" level="INFO">POST Request : url=https://practice.expandtesting.com/notes/api/users/login 
+ path_url=/notes/api/users/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '56', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=jerrylee%40example.org&amp;password=8O%234TZk%2A%28%23 
+ </msg>
+<msg time="2024-08-05T11:37:09.126105" level="INFO">POST Response : url=https://practice.expandtesting.com/notes/api/users/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"e4-rCZ/3d6h5pbX5AOTDanCmTCdOMw"', 'set-cookie': 'express:sess=eyJmbGFzaCI6e319; path=/; httponly, express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0; path=/; httponly', 'date': 'Mon, 05 Aug 2024 09:37:09 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
+ body={"success":true,"status":200,"message":"Login successful","data":{"id":"66b09d449387f7014a54bab1","name":"Denise Farmer","email":"jerrylee@example.org","token":"8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad"}} 
+ </msg>
+<msg time="2024-08-05T11:37:09.126105" level="INFO">${responseLU} = &lt;Response [200]&gt;</msg>
+<var>${responseLU}</var>
+<arg>alias=expandtesting</arg>
+<arg>url=/users/login</arg>
+<arg>data=${data}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-08-05T11:37:08.643761" elapsed="0.482344"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.126105" level="INFO">${json_responseLU} = {'success': True, 'status': 200, 'message': 'Login successful', 'data': {'id': '66b09d449387f7014a54bab1', 'name': 'Denise Farmer', 'email': 'jerrylee@example.org', 'token': '8a1e4e20057148c19bc19a777...</msg>
+<var>${json_responseLU}</var>
+<arg>${responseLU.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2024-08-05T11:37:09.126105" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.153354" level="INFO">${user_email_ob} = ['jerrylee@example.org']</msg>
+<var>${user_email_ob}</var>
+<arg>${json_responseLU}</arg>
+<arg>data.email</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.126105" elapsed="0.027249"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.188842" level="INFO">${user_email_str} = ["jerrylee@example.org"]</msg>
+<var>${user_email_str}</var>
+<arg>${user_email_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.188842" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.188842" level="INFO">${user_email_rsp} = jerrylee@example.org</msg>
+<var>${user_email_rsp}</var>
+<arg>${user_email_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.188842" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.221649" level="INFO">${user_id_ob} = ['66b09d449387f7014a54bab1']</msg>
+<var>${user_id_ob}</var>
+<arg>${json_responseLU}</arg>
+<arg>data.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.188842" elapsed="0.032807"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.221649" level="INFO">${user_id_str} = ["66b09d449387f7014a54bab1"]</msg>
+<var>${user_id_str}</var>
+<arg>${user_id_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.221649" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.221649" level="INFO">${user_id_rsp} = 66b09d449387f7014a54bab1</msg>
+<var>${user_id_rsp}</var>
+<arg>${user_id_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.221649" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.237267" level="INFO">${user_name_ob} = ['Denise Farmer']</msg>
+<var>${user_name_ob}</var>
+<arg>${json_responseLU}</arg>
+<arg>data.name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.221649" elapsed="0.015618"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.250277" level="INFO">${user_name_str} = ["Denise Farmer"]</msg>
+<var>${user_name_str}</var>
+<arg>${user_name_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.250277" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.250277" level="INFO">${user_name_rsp} = Denise Farmer</msg>
+<var>${user_name_rsp}</var>
+<arg>${user_name_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.250277" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.266791" level="INFO">${user_password_ob} = []</msg>
+<var>${user_password_ob}</var>
+<arg>${json_responseLU}</arg>
+<arg>data.password</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.250277" elapsed="0.016514"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.266791" level="INFO">${user_password_str} = []</msg>
+<var>${user_password_str}</var>
+<arg>${user_password_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.266791" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.266791" level="INFO">${user_password_rsp} = </msg>
+<var>${user_password_rsp}</var>
+<arg>${user_password_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.266791" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.300300" level="INFO">${user_token_ob} = ['8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad']</msg>
+<var>${user_token_ob}</var>
+<arg>${json_responseLU}</arg>
+<arg>data.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.266791" elapsed="0.033509"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.300300" level="INFO">${user_token_str} = ["8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad"]</msg>
+<var>${user_token_str}</var>
+<arg>${user_token_ob}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.300300" level="INFO">${user_token} = 8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad</msg>
+<var>${user_token}</var>
+<arg>${user_token_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user_email}</arg>
+<arg>${user_email_rsp}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user_id}</arg>
+<arg>${user_id_rsp}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user_name}</arg>
+<arg>${user_name_rsp}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>Login successful</arg>
+<arg>${responseLU.json()['message']}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${responseLU.json()['message']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.000000"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-08-05T11:37:09.315979" level="INFO" html="true">Created file '&lt;a href="file://C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json"&gt;C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json&lt;/a&gt;'.</msg>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<arg>{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.300300" elapsed="0.015679"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.315979" level="INFO">${data} = {'user_email': 'jerrylee@example.org', 'user_id': '66b09d449387f7014a54bab1', 'user_name': 'Denise Farmer', 'user_password': '8O#4TZk*(#', 'user_token': '8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148...</msg>
+<var>${data}</var>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.315979" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.347267" level="INFO">${user_token_data} = ['8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad']</msg>
+<var>${user_token_data}</var>
+<arg>${data}</arg>
+<arg>$.user_token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-05T11:37:09.315979" elapsed="0.031288"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.378475" level="INFO">${user_token_str} = ["8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad"]</msg>
+<var>${user_token_str}</var>
+<arg>${user_token_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-05T11:37:09.362859" elapsed="0.015616"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-05T11:37:09.378475" level="INFO">${user_token} = 8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad</msg>
+<var>${user_token}</var>
+<arg>${user_token}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.378475" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-08-05T11:37:09.378475" level="INFO">${headers} = {'content-type': 'application/json; charset=utf-8', 'X-Auth-Token': '8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad'}</msg>
+<var>${headers}</var>
+<arg>content-type=application/json; charset=utf-8</arg>
+<arg>X-Auth-Token=${user_token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.378475" elapsed="0.000000"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:09.378475" level="INFO">Creating Session using : alias=expandtesting, url=https://practice.expandtesting.com/notes/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=expandtesting</arg>
+<arg>url=https://practice.expandtesting.com/notes/api</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-08-05T11:37:09.378475" elapsed="0.000000"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2024-08-05T11:37:09.765883" level="INFO">DELETE Request : url=https://practice.expandtesting.com/notes/api/users/delete-account 
+ path_url=/notes/api/users/delete-account 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'content-type': 'application/json; charset=utf-8', 'X-Auth-Token': '8a1e4e20057148c19bc19a7776f0e3094c7bb321dbd148788399ee86734b28ad', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-08-05T11:37:09.765883" level="INFO">DELETE Response : url=https://practice.expandtesting.com/notes/api/users/delete-account 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"46-xvIiFl/4e/p/xA8LA+FZxbRy7yU"', 'set-cookie': 'express:sess=eyJmbGFzaCI6e319; path=/; httponly, express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0; path=/; httponly', 'date': 'Mon, 05 Aug 2024 09:37:09 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
+ body={"success":true,"status":200,"message":"Account successfully deleted"} 
+ </msg>
+<msg time="2024-08-05T11:37:09.765883" level="INFO">${responseDU} = &lt;Response [200]&gt;</msg>
+<var>${responseDU}</var>
+<arg>alias=expandtesting</arg>
+<arg>url=/users/delete-account</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.378475" elapsed="0.387408"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2024-08-05T11:37:09.765883" level="INFO">${json_responseDU} = {'success': True, 'status': 200, 'message': 'Account successfully deleted'}</msg>
+<var>${json_responseDU}</var>
+<arg>${responseDU.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2024-08-05T11:37:09.765883" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>Account successfully deleted</arg>
+<arg>${responseDU.json()['message']}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.765883" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${responseDU.json()['message']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.765883" elapsed="0.000000"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem">
+<msg time="2024-08-05T11:37:09.765883" level="INFO" html="true">Removed file '&lt;a href="file://C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json"&gt;C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-2354941043905259.json&lt;/a&gt;'.</msg>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-08-05T11:37:09.765883" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-08-05T11:37:07.796885" elapsed="1.968998"/>
+</test>
+<status status="PASS" start="2024-08-05T11:37:06.635706" elapsed="3.130177"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Users Api">Users Api</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
