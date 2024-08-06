@@ -1,13 +1,10 @@
 *** Settings ***
+
 Library    RequestsLibrary
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
 Library    FakerLibrary
-
-*** Variables ***
-
-
 
 *** Test Cases ***
 
