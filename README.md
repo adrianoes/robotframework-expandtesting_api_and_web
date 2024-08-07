@@ -62,6 +62,7 @@ Check then both to add both options in context menu.
 - [Error regarding installing robotframework-jsonlibrary explicitly](https://blog.finxter.com/fixed-modulenotfounderror-no-module-named-robotframework-jsonlibrary/)
 - [No module named 'pkg_resources'](https://cursos.alura.com.br/forum/topico-problemas-com-a-library-no-robot-339325)
 - [InsecureRequestWarning: Unverified HTTPS request is being made in Robot Framework.](https://stackoverflow.com/a/45223128/10519428)
+- [How can i get the Local Storage data using "Execute Javascript" Keyword in Robot Framework](https://stackoverflow.com/a/73624779/10519428)
 
 # Tips:
 
