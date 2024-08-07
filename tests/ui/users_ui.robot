@@ -1,7 +1,7 @@
 *** Settings ***
 
 Library    SeleniumLibrary
-Library    SeleniumLibrary    plugins=SeleniumTestability;True;30 Seconds;True
+# Library    SeleniumLibrary    plugins=SeleniumTestability;True;30 Seconds;True
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
@@ -57,5 +57,6 @@ Creates a new user account via UI
     Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
     Go To    url=https://practice.expandtesting.com/notes/app/profile
     ${user_id}    Get Value    locator=//input[@id='user-id']
-    # ${user_token}    Get Storage Item    token    localStorage   
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
+    Log To Console    ${user_token}
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
