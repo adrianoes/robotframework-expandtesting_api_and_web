@@ -1,7 +1,6 @@
 *** Settings ***
 
 Library    SeleniumLibrary
-# Library    SeleniumLibrary    plugins=SeleniumTestability;True;30 Seconds;True
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
@@ -17,6 +16,12 @@ Creates a new user account via UI
     ${user_password}    FakerLibrary.password
     Open Browser   url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_experimental_option("detach",True)
     Maximize Browser Window
+    Click Element    locator=//div[@class='page-layout']
+    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@name='name']    text=${user_name}
     Input Text    locator=//input[@id='password']    text=${user_password}
