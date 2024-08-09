@@ -24,6 +24,8 @@ jobs:
       - name: purge my --user-data-dir=/path/to/profil_X
 
         run: rm -rf ~/.config/chromium/profil_X/*
+      - name: Test with RobotFramework
+        run: robot -d ./results tests
          
       - name: Test Report Generation
         uses: actions/upload-artifact@v4
