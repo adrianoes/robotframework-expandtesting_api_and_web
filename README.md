@@ -14,9 +14,9 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | JSONLibrary                     | 0.5            | -                                                               | 
 | robotframework-faker            | 5.0.0          | -                                                               | 
 | Robot Framework Language Server | v1.12.0        | -                                                               |
-| Chrome                          | 127.0.6533.89  | -                                                               |
+| Chrome                          | 127.0.6533.100 | -                                                               |
 | Firefox                         | 124.0.1        | -                                                               |
-| Chrome webdriver                | 127.0.6533.88  | -                                                               |
+| Chrome webdriver                | 127.0.6533.99  | -                                                               |
 | Firefox geckodriver             | 0.34.0         | -                                                               |
 | Chrome TruePath                 | 1.0.0          | Optional. Recommended so you can work with accurate locators.   |              
 
@@ -46,7 +46,7 @@ Check then both to add both options in context menu.
 
 # Tests:
 
-- Execute ```robot -d ./results api/tests``` to run tests in headless mode. 
+- Execute ```robot -d ./results tests``` to run tests in headless mode. 
 
 # Support:
 
@@ -66,4 +66,5 @@ Check then both to add both options in context menu.
 
 # Tips:
 
+- UI and API tests to send password reset link to user's email and API tests to verify a password reset token and reset a user's password must be tested manually as they rely on e-mail verification.
 - Always check drivers and browsers versios before running the tests. They should be compatible.

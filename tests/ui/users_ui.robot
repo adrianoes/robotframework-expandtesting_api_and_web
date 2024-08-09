@@ -14,7 +14,8 @@ Creates a new user account via UI
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
-    Open Browser   url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_experimental_option("detach",True)
+    Open Browser   browser=chrome    options=add_experimental_option("detach",True) 
+    Go To    url=https://practice.expandtesting.com/notes/app/register       
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
     #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
