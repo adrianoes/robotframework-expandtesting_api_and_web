@@ -14,8 +14,14 @@ Creates a new user account via UI
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
-    Open Browser   browser=chrome    options=add_experimental_option("detach",True) 
-    Go To    url=https://practice.expandtesting.com/notes/app/register       
+    ${chrome options} =     Evaluate    selenium.webdriver.ChromeOptions()    modules=selenium, selenium.webdriver
+    # Call Method    ${chrome_options}   add_argument    headless
+    Call Method    ${chrome_options}   add_argument    --no-sandbox   # newly added argument
+    # Call Method    ${chrome_options}   add_argument    disable-gpu
+    # Call Method    ${chrome_options}   add_argument    --ignore-certificate-errors
+    # ${var}=     Call Method     ${chrome_options}    to_capabilities 
+    Create Webdriver   driver_name=Chrome   alias=google   chrome_options=${chrome_options}
+    Open Browser   url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_experimental_option("detach",True)    
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
     #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
