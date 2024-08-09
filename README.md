@@ -6,7 +6,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 
 | Requirement                     | Version        | Note                                                            |
 | :------------------------------ |:---------------| :-------------------------------------------------------------- |
-| Python                          | 3.12.4         | -                                                               |
+| Python                          | 3.12.5         | -                                                               |
 | Visual Studio Code              | 1.89.1         | -                                                               |
 | Robot Framework                 | 7.0.1          | -                                                               | 
 | SeleniumLibrary                 | 6.3.0          | -                                                               | 
