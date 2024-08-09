@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.5 on win32)" generated="2024-08-09T22:07:35.812690" rpa="false" schemaversion="5">
+<suite id="s1" name="Users Ui" source="c:\robot-expandtesting_UI_and_API\tests\ui\users_ui.robot">
+<test id="s1-t1" name="Creates a new user account via UI" line="12">
+<kw name="Credit Card Number" owner="FakerLibrary">
+<msg time="2024-08-09T22:07:36.829151" level="INFO">${bypassParalelismNumber} = 213192621619202</msg>
+<var>${bypassParalelismNumber}</var>
+<doc>Generate a valid credit card number.</doc>
+<status status="PASS" start="2024-08-09T22:07:36.828542" elapsed="0.002690"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2024-08-09T22:07:36.833408" level="INFO">${user_email} = riddlemelinda@example.com</msg>
+<var>${user_email}</var>
+<status status="PASS" start="2024-08-09T22:07:36.832378" elapsed="0.001568"/>
+</kw>
+<kw name="Name" owner="FakerLibrary">
+<msg time="2024-08-09T22:07:36.835668" level="INFO">${user_name} = Cindy Cook</msg>
+<var>${user_name}</var>
+<doc>:example: 'John Doe'</doc>
+<status status="PASS" start="2024-08-09T22:07:36.834481" elapsed="0.001187"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2024-08-09T22:07:36.837249" level="INFO">${user_password} = eL2@Y@lap+</msg>
+<var>${user_password}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2024-08-09T22:07:36.836719" elapsed="0.000530"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:36.839981" level="INFO">Opening browser 'chrome' to base url 'https://practice.expandtesting.com/notes/app/register'.</msg>
+<arg>url=https://practice.expandtesting.com/notes/app/register</arg>
+<arg>browser=chrome</arg>
+<arg>options=add_experimental_option("detach",True)</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-08-09T22:07:36.838940" elapsed="3.593266"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.432206" elapsed="0.036344"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.471663" level="INFO">Clicking element '//div[@class='page-layout']'.</msg>
+<arg>locator=//div[@class='page-layout']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.471663" elapsed="0.204444"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.678104" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:40.679141" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:40.680169" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.677101" elapsed="0.027810"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.706915" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:40.707911" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:40.708918" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.705911" elapsed="0.101749"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.810653" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:40.810653" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:40.810653" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.810653" elapsed="0.024345"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.836866" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:40.836866" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:40.836866" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.835998" elapsed="0.014659"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:40.867462" level="INFO">Typing text 'riddlemelinda@example.com' into text field '//input[@id='email']'.</msg>
+<arg>locator=//input[@id='email']</arg>
+<arg>text=${user_email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:40.866468" elapsed="0.433532"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:41.302323" level="INFO">Typing text 'Cindy Cook' into text field '//input[@name='name']'.</msg>
+<arg>locator=//input[@name='name']</arg>
+<arg>text=${user_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:41.300095" elapsed="1.405521"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:42.708358" level="INFO">Typing text 'eL2@Y@lap+' into text field '//input[@id='password']'.</msg>
+<arg>locator=//input[@id='password']</arg>
+<arg>text=${user_password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:42.706617" elapsed="0.250580"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:42.957197" level="INFO">Typing text 'eL2@Y@lap+' into text field '//input[@name='confirmPassword']'.</msg>
+<arg>locator=//input[@name='confirmPassword']</arg>
+<arg>text=${user_password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:42.957197" elapsed="0.203385"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.161581" level="INFO">Clicking element '//div[@class='page-layout']'.</msg>
+<arg>locator=//div[@class='page-layout']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.161581" elapsed="0.065043"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.226624" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.239660" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.239660" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.226624" elapsed="0.014052"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.240676" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.240676" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.240676" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.240676" elapsed="0.029695"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.271493" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.272360" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.272984" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.270371" elapsed="0.024630"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.300162" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.300162" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.300162" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.298165" elapsed="0.110150"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.408315" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.408315" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.408315" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.408315" elapsed="0.038155"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.446470" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.446470" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.446470" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.446470" elapsed="0.022508"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.470308" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.470308" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.470308" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.469989" elapsed="0.023644"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.497658" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.497658" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.497658" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.494646" elapsed="0.066103"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.563732" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.563732" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.564728" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.561730" elapsed="0.060665"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.630712" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:43.631707" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:43.631707" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.626713" elapsed="0.032478"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:43.662122" level="INFO">Clicking button '//button[contains(.,'Register')]'.</msg>
+<arg>locator=//button[contains(.,'Register')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.661130" elapsed="0.220505"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>locator=//b[contains(.,'User account created successfully')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-08-09T22:07:43.882921" elapsed="0.531031"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-08-09T22:07:44.420956" level="INFO" html="true">Created file '&lt;a href="file://C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-213192621619202.json"&gt;C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-213192621619202.json&lt;/a&gt;'.</msg>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<arg>{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-08-09T22:07:44.415951" elapsed="0.007003"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2024-08-09T22:07:44.442335" level="INFO">${data} = {'user_email': 'riddlemelinda@example.com', 'user_name': 'Cindy Cook', 'user_password': 'eL2@Y@lap+'}</msg>
+<var>${data}</var>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2024-08-09T22:07:44.426713" elapsed="0.015622"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-09T22:07:44.489205" level="INFO">${user_email_data} = ['riddlemelinda@example.com']</msg>
+<var>${user_email_data}</var>
+<arg>${data}</arg>
+<arg>$.user_email</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-09T22:07:44.442335" elapsed="0.046870"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-09T22:07:44.489205" level="INFO">${user_email_str} = ["riddlemelinda@example.com"]</msg>
+<var>${user_email_str}</var>
+<arg>${user_email_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-09T22:07:44.489205" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-09T22:07:44.489205" level="INFO">${user_email} = riddlemelinda@example.com</msg>
+<var>${user_email}</var>
+<arg>${user_email_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-09T22:07:44.489205" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2024-08-09T22:07:44.523216" level="INFO">${user_password_data} = ['eL2@Y@lap+']</msg>
+<var>${user_password_data}</var>
+<arg>${data}</arg>
+<arg>$.user_password</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2024-08-09T22:07:44.489205" elapsed="0.034011"/>
+</kw>
+<kw name="Convert Json To String" owner="JSONLibrary">
+<msg time="2024-08-09T22:07:44.523216" level="INFO">${user_password_str} = ["eL2@Y@lap+"]</msg>
+<var>${user_password_str}</var>
+<arg>${user_password_data}</arg>
+<doc>Convert JSON object to string</doc>
+<status status="PASS" start="2024-08-09T22:07:44.523216" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-08-09T22:07:44.523216" level="INFO">${user_password} = eL2@Y@lap+</msg>
+<var>${user_password}</var>
+<arg>${user_password_str}</arg>
+<arg>[</arg>
+<arg>]</arg>
+<arg>'</arg>
+<arg>"</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-08-09T22:07:44.523216" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:44.523216" level="INFO">Opening url 'https://practice.expandtesting.com/notes/app/login'</msg>
+<arg>url=https://practice.expandtesting.com/notes/app/login</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2024-08-09T22:07:44.523216" elapsed="2.025008"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:46.549221" level="INFO">Typing text 'riddlemelinda@example.com' into text field '//input[@id='email']'.</msg>
+<arg>locator=//input[@id='email']</arg>
+<arg>text=${user_email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:46.549221" elapsed="0.295367"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:46.846588" level="INFO">Typing text 'eL2@Y@lap+' into text field '//input[@id='password']'.</msg>
+<arg>locator=//input[@id='password']</arg>
+<arg>text=${user_password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:46.845584" elapsed="0.161601"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.007185" level="INFO">Clicking element '//div[@class='page-layout']'.</msg>
+<arg>locator=//div[@class='page-layout']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.007185" elapsed="0.064537"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.071722" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:47.071722" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:47.071722" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.071722" elapsed="0.016353"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.088075" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:47.088075" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:47.088075" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.088075" elapsed="0.019214"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.107289" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:47.107289" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:47.107289" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.107289" elapsed="0.000000"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.121557" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:47.121557" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:47.121557" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.119797" elapsed="0.001760"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.121557" level="INFO">Sending key(s) ('ARROW_DOWN',) to page.</msg>
+<msg time="2024-08-09T22:07:47.136568" level="INFO">Pressing special key ARROW_DOWN to browser.</msg>
+<msg time="2024-08-09T22:07:47.136568" level="INFO">Releasing special key ARROW_DOWN.</msg>
+<arg>None</arg>
+<arg>ARROW_DOWN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.121557" elapsed="0.016993"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.154114" level="INFO">Clicking button '//button[contains(.,'Login')]'.</msg>
+<arg>locator=//button[contains(.,'Login')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.138550" elapsed="0.161662"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>locator=//a[contains(.,'MyNotes')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.301209" elapsed="0.470927"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:47.772136" level="INFO">Opening url 'https://practice.expandtesting.com/notes/app/profile'</msg>
+<arg>url=https://practice.expandtesting.com/notes/app/profile</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2024-08-09T22:07:47.772136" elapsed="1.850716"/>
+</kw>
+<kw name="Get Value" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:49.663634" level="INFO">${user_id} = 66b67710fe1bff014e31d381</msg>
+<var>${user_id}</var>
+<arg>locator=//input[@id='user-id']</arg>
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-08-09T22:07:49.623848" elapsed="0.040783"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-08-09T22:07:49.667635" level="INFO">Executing JavaScript:
+return window["localStorage"].getItem("token")
+Without any arguments.</msg>
+<msg time="2024-08-09T22:07:49.772444" level="INFO">${user_token} = 6122f0709dfd4a88a992188667a79fe1e8d1953eee97407d8a071c06f5d1c288</msg>
+<var>${user_token}</var>
+<arg>return window["localStorage"].getItem("token")</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-08-09T22:07:49.665634" elapsed="0.107738"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${user_token}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-08-09T22:07:49.774377" elapsed="0.002996"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-08-09T22:07:49.780855" level="INFO" html="true">Created file '&lt;a href="file://C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-213192621619202.json"&gt;C:\robot-expandtesting_UI_and_API\tests\fixtures\testdata-213192621619202.json&lt;/a&gt;'.</msg>
+<arg>tests/fixtures/testdata-${bypassParalelismNumber}.json</arg>
+<arg>{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-08-09T22:07:49.778372" elapsed="0.002483"/>
+</kw>
+<status status="PASS" start="2024-08-09T22:07:36.826910" elapsed="12.954957"/>
+</test>
+<status status="PASS" start="2024-08-09T22:07:35.812690" elapsed="13.973110"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Users Ui">Users Ui</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
