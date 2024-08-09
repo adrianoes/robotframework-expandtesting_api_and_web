@@ -4,3 +4,4 @@ robotframework-requests
 robotframework-jsonlibrary
 robotframework-faker
 setuptools
+webdrivermanager
