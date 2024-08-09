@@ -17,7 +17,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | Chrome                          | 127.0.6533.100 | -                                                               |
 | Firefox                         | 124.0.1        | -                                                               |
 | Chrome webdriver                | 127.0.6533.99  | -                                                               |
-| Firefox geckodriver             | 0.34.0         | -                                                               |
+| Firefox geckodriver             | 0.35.0         | -                                                               |
 | Chrome TruePath                 | 1.0.0          | Optional. Recommended so you can work with accurate locators.   |              
 
 # Installation:
