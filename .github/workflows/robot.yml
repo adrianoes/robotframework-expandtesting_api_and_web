@@ -1,4 +1,4 @@
-name: Robot Framework - Python
+name: robot-expandtesting_UI_and_API
 on:
   push:
     branches: [ "main" ]
@@ -9,30 +9,32 @@ permissions:
   contents: read
  
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
-     
+    name: E2E Tests 
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python 3.12.1
+      - name: Checkout 
+        uses: actions/checkout@v4
+
+      - name: Setup Python 
         uses: actions/setup-python@v5
         with:
-          python-version: 3.12
-   
-      - name: Install dependencies
+          python-version: '3.11'
+
+      - name: Install dependencies 
         run: pip install -r requirements.txt
-      - name: purge my --user-data-dir=/path/to/profil_X
 
-        run: rm -rf ~/.config/chromium/profil_X/*
-      - name: Test with RobotFramework
+      - name: Run tests 
         run: robot -d ./results tests
-         
-      - name: Test Report Generation
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          name: Report                # Name of the folder
-          path: results           # Path to test results
 
+      - name: Publish Robot Reports 
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Robot-Reports
+          path: reports
+          retention-days: 90
+          if-no-files-found: warn
 
 
