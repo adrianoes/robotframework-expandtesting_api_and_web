@@ -63,6 +63,7 @@ Check then both to add both options in context menu.
 - [No module named 'pkg_resources'](https://cursos.alura.com.br/forum/topico-problemas-com-a-library-no-robot-339325)
 - [InsecureRequestWarning: Unverified HTTPS request is being made in Robot Framework.](https://stackoverflow.com/a/45223128/10519428)
 - [How can i get the Local Storage data using "Execute Javascript" Keyword in Robot Framework](https://stackoverflow.com/a/73624779/10519428)
+- [WebDriverException: unknown error: DevToolsActivePort file doesn't exist while trying to initiate Chrome Browser](https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t)
 
 # Tips:
 

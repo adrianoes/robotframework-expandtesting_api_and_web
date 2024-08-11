@@ -13,6 +13,9 @@ Creates a new user account via UI
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
+    # Chrome presents an error only in github actions when tests are ran in normal browser. Something related to chromedriver. So if tests run in headless the problem disappear. 
+    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
+    # To run the tests with UI, comment the line below and uncomment the line above. 
     Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
