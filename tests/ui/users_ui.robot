@@ -4,8 +4,7 @@ Library    SeleniumLibrary
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
-Library    FakerLibrary
-    
+Library    FakerLibrary    
 
 *** Test Cases ***
 
@@ -14,11 +13,7 @@ Creates a new user account via UI
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
-
-    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
-
-
-    
+    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
     #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
@@ -45,7 +40,6 @@ Creates a new user account via UI
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
-
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
