@@ -1,3 +1,4 @@
+
 *** Settings ***
 
 Library    SeleniumLibrary
@@ -39,7 +40,7 @@ Creates a new user account via UI
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN            
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
@@ -64,5 +65,5 @@ Creates a new user account via UI
     Go To    url=https://practice.expandtesting.com/notes/app/profile
     ${user_id}    Get Value    locator=//input[@id='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
-    Log To Console    ${user_token}
+    Log To Console    ${response}
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
