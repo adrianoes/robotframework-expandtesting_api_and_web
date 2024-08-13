@@ -1,4 +1,4 @@
-# playwright-expandtesting_UI_and_API
+# robot-expandtesting_UI_and_API
 
 UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/app/) note app. This project contains basic examples on how to use Robot Framework to test UI, API and how to combine UI and API tests. Good practices such as hooks, custom commands and tags, among others, are used. All the necessary support documentation to develop this project is placed here. When it comes to the API part, it deals with the x-www-form-urlencoded content type. Although custom commands are used, the assertion code to each test is kept in it so we can work independently in each test. It creates one .json file for each test so we can share data between different requests in the test. The .json file is excluded after each test execution. 
 
@@ -64,6 +64,7 @@ Check then both to add both options in context menu.
 - [InsecureRequestWarning: Unverified HTTPS request is being made in Robot Framework.](https://stackoverflow.com/a/45223128/10519428)
 - [How can i get the Local Storage data using "Execute Javascript" Keyword in Robot Framework](https://stackoverflow.com/a/73624779/10519428)
 - [WebDriverException: unknown error: DevToolsActivePort file doesn't exist while trying to initiate Chrome Browser](https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t)
+- [Como fazer um laço FOR no Robot Framework!?](https://www.youtube.com/watch?v=j6AB2Rh4mKw)
 - [Set List Value](https://robotframework.org/robotframework/latest/libraries/Collections.html#Set%20List%20Value)
 
 # Tips:
