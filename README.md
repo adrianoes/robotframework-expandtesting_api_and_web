@@ -22,7 +22,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 
 # Installation:
 
-- See [python page](https://www.python.org/downloads/) and download the latest Python stable version. Start the installation and check the checkboxes below, : 
+- See [python page](https://www.python.org/downloads/) and download the latest Python stable version. Start the installation and check the checkboxes below: 
   - :white_check_mark: Use admin privileges when installing py.exe 
   - :white_check_mark: Add python.exe to PATH
 and keep all the other preferenced options as they are.
@@ -66,6 +66,7 @@ Check then both to add both options in context menu.
 - [WebDriverException: unknown error: DevToolsActivePort file doesn't exist while trying to initiate Chrome Browser](https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t)
 - [Como fazer um laço FOR no Robot Framework!?](https://www.youtube.com/watch?v=j6AB2Rh4mKw)
 - [Set List Value](https://robotframework.org/robotframework/latest/libraries/Collections.html#Set%20List%20Value)
+- [Element not visible sometimes with Robot Framework](https://stackoverflow.com/a/33317412/10519428)
 
 # Tips:
 
