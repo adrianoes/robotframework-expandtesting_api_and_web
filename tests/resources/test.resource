@@ -156,6 +156,7 @@ logInUserViaUi(${bypassParalelismNumber})
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
     Go To    url=https://practice.expandtesting.com/notes/app/login
+    Reload Page
     Click Element    locator=//div[@class='page-layout']
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
@@ -179,12 +180,29 @@ logInUserViaUi(${bypassParalelismNumber})
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
-    ${user_id}    Get Value    locator=(//div[contains(@class,'form-group mb-2')])[1]
+    ${user_id}    Get Value    locator=//input[@data-testid='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
 deleteUserViaUi(${bypassParalelismNumber})
     Go To    url=https://practice.expandtesting.com/notes/app/profile
+    Click Element    locator=//div[@class='page-layout']
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     Click Button    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[@data-testid='note-delete-confirm']
     #My approach is to change the 'Wait Until Element is Visible' to Wait Until Page Contains Element like below. The reason to change to this keyword is that sometimes, the element is already loaded and available in DOM or page but the visibility is hidden. 

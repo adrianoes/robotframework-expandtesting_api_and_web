@@ -46,7 +46,8 @@ Check then both to add both options in context menu.
 
 # Tests:
 
-- Execute ```robot -d ./results tests``` to run tests in headless mode. 
+- Execute ```robot -d ./results tests``` to run tests in headless mode and store results in separated folder.
+- Execute ```robot -d ./results -t "Change a user\'s password via UI" tests/ui/users_ui.robot``` to run Change a user's password via UI test case inside users_ui.robot suite and store results in separated folder.
 
 # Support:
 
