@@ -65,9 +65,10 @@ Check then both to add both options in context menu.
 - [InsecureRequestWarning: Unverified HTTPS request is being made in Robot Framework.](https://stackoverflow.com/a/45223128/10519428)
 - [How can i get the Local Storage data using "Execute Javascript" Keyword in Robot Framework](https://stackoverflow.com/a/73624779/10519428)
 - [WebDriverException: unknown error: DevToolsActivePort file doesn't exist while trying to initiate Chrome Browser](https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t)
-- [Como fazer um laço FOR no Robot Framework!?](https://www.youtube.com/watch?v=j6AB2Rh4mKw)
+- [How to perform a FOR loop in the Robot Framework!?](https://www.youtube.com/watch?v=j6AB2Rh4mKw)
 - [Set List Value](https://robotframework.org/robotframework/latest/libraries/Collections.html#Set%20List%20Value)
 - [Element not visible sometimes with Robot Framework](https://stackoverflow.com/a/33317412/10519428)
+- [How to use IF ELSE in Robot Framework #12](https://www.youtube.com/watch?v=NcLXjVz163A)
 
 # Tips:
 
