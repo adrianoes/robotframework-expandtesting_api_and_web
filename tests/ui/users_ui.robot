@@ -212,9 +212,7 @@ Delete user account via UI
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+
     Click Button    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[@data-testid='note-delete-confirm']
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]
