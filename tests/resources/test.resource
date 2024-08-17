@@ -174,6 +174,9 @@ logInUserViaUi(${bypassParalelismNumber})
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     ${user_id}    Get Value    locator=//input[@data-testid='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
@@ -181,6 +184,10 @@ logInUserViaUi(${bypassParalelismNumber})
 deleteUserViaUi(${bypassParalelismNumber})
     Go To    url=https://practice.expandtesting.com/notes/app/profile
     Click Element    locator=//div[@class='page-layout']
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN

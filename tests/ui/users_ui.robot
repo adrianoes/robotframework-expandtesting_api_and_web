@@ -85,6 +85,9 @@ Log in as an existing user via UI
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     ${user_id}    Get Value    locator=//input[@data-testid='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
@@ -210,7 +213,13 @@ Delete user account via UI
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
-
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     Click Button    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[@data-testid='note-delete-confirm']
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]
