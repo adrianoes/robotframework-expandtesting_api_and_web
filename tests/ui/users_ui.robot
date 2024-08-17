@@ -72,12 +72,6 @@ Log in as an existing user via UI
     Press Keys  None  ARROW_DOWN
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@id='password']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
     Click Button    locator=//button[contains(.,'Login')]
     Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
     Go To    url=https://practice.expandtesting.com/notes/app/profile

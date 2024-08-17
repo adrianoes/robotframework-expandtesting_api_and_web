@@ -27,7 +27,7 @@ Create a new note via UI
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Work", "Personal")
+    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -94,7 +94,18 @@ Create a new note via UI
     #Not able to get the note id part of the url because iframe took over. I can use get all notes request when mixing ui and api tests.
     # Got note id using Get Element Attribute keyword
     ${note_id_full_url_extension}    Get Element Attribute    locator=//a[contains(.,'View')]    attribute=href
-     ${note_id}    Remove String    ${note_id_full_url_extension}    https://practice.expandtesting.com/notes/app/notes/    
+    ${note_id}    Remove String    ${note_id_full_url_extension}    https://practice.expandtesting.com/notes/app/notes/
+    ${note_id_color}    Get Element Attribute    locator=//div[@data-testid='note-card-title']    attribute=style
+    IF    "${note_completed}" == "1"
+        Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
+    ELSE IF    "Home" == "${note_category}"
+        Should Be Equal    ${note_id_color}    background-color: rgb(255, 145, 0); color: rgb(255, 255, 255);
+    ELSE IF    "Personal" == "${note_category}"
+        Should Be Equal    ${note_id_color}    background-color: rgb(50, 140, 160); color: rgb(255, 255, 255);
+    ELSE
+        Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
+    END 
+    # Log To Console    ${note_id_color}
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser

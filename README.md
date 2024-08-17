@@ -69,6 +69,8 @@ Check then both to add both options in context menu.
 - [Set List Value](https://robotframework.org/robotframework/latest/libraries/Collections.html#Set%20List%20Value)
 - [Element not visible sometimes with Robot Framework](https://stackoverflow.com/a/33317412/10519428)
 - [How to use IF ELSE in Robot Framework #12](https://www.youtube.com/watch?v=NcLXjVz163A)
+- [How to Use IF and ELSE in Robot Framework](https://stackoverflow.com/a/72145975/10519428)
+- [Can't extract url value from ahref to variable](https://forum.robotframework.org/t/cant-extract-url-value-from-ahref-to-variable/3159/4)
 
 # Tips:
 

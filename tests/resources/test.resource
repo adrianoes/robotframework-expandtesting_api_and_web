@@ -165,12 +165,6 @@ logInUserViaUi(${bypassParalelismNumber})
     Press Keys  None  ARROW_DOWN
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@id='password']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
     Click Button    locator=//button[contains(.,'Login')]
     Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
     Go To    url=https://practice.expandtesting.com/notes/app/profile
@@ -214,9 +208,9 @@ createUserViaUi(${bypassParalelismNumber})
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
     # Chrome presents an error only in github actions when tests are ran in normal browser. Something related to chromedriver. So if tests run in headless the problem disappear. 
-    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
+    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
     # To run the tests with UI, comment the line below and uncomment the line above. 
-    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
+    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
     #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
