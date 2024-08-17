@@ -40,6 +40,10 @@ Creates a new user account via UI
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN        
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN            
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]

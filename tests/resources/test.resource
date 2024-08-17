@@ -233,7 +233,11 @@ createUserViaUi(${bypassParalelismNumber})
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN            
+    Press Keys  None  ARROW_DOWN        
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN      
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
