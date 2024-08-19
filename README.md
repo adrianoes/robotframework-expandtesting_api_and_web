@@ -10,11 +10,11 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | Python                          | 3.12.5         | -                                                               |
 | Visual Studio Code              | 1.89.1         | -                                                               |
 | Robot Framework                 | 7.0.1          | -                                                               | 
-| SeleniumLibrary                 | 6.3.0          | -                                                               | 
+| Browser Library                 | 18.8.0         | -                                                               | 
 | RequestsLibrary                 | 0.9.7          | -                                                               | 
 | JSONLibrary                     | 0.5            | -                                                               | 
 | robotframework-faker            | 5.0.0          | -                                                               | 
-| Robot Framework Language Server | v1.12.0        | -                                                               |
+| Robot Framework Language Server | 1.12.0         | -                                                               |
 | Chrome                          | 127.0.6533.100 | -                                                               |
 | Firefox                         | 129.0          | -                                                               |
 | Chrome webdriver                | 127.0.6533.99  | -                                                               |
@@ -58,7 +58,7 @@ Check then both to add both options in context menu.
 
 - [expandtesting API documentation page](https://practice.expandtesting.com/notes/api/api-docs/)
 - [expandtesting API demonstration page](https://www.youtube.com/watch?v=bQYvS6EEBZc)
-- [SeleniumLibrary](https://robotframework.org/SeleniumLibrary/SeleniumLibrary.html)
+- [Browser Library](https://robotframework-browser.org/#installation)
 - [RequestsLibrary](https://github.com/MarketSquare/robotframework-requests#readme)
 - [JSONLibrary](https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html#library-documentation-top)
 - [FakerLibrary](https://marketsquare.github.io/robotframework-faker/)
