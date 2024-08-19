@@ -21,6 +21,8 @@ jobs:
    
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Initialize the Browser library
+        run: rfbrowser init
    
       - name: Test with RobotFramework
         run: robot -d ./results tests
