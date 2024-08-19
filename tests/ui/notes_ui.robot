@@ -1,7 +1,8 @@
 *** Settings ***
 
 Resource    ../resources/test.resource
-Library    SeleniumLibrary
+
+Library    Browser
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
@@ -32,72 +33,38 @@ Create a new note via UI
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
     ${note_title}    FakerLibrary.Sentence    nb_words=3
-    Go To    url=https://practice.expandtesting.com/notes/app
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Click Element    locator=//button[contains(.,'+ Add Note')]
-    #It did not work with locator instead of xpath. Don't know why.
-    Select From List By Value    xpath=//select[@data-testid='note-category']    ${note_category}
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//div[@class='page-layout']
+    Click    selector=//button[contains(.,'+ Add Note')]
+    Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
-        Wait Until Keyword Succeeds    1 min    1 sec    Select Checkbox    locator=//input[@data-testid='note-completed']
+        Check Checkbox    selector=//input[@data-testid='note-completed']
     END  
-    Input Text    locator=//input[@data-testid='note-title']    text=${note_title}
-    Input Text    locator=//textarea[@data-testid='note-description']    text=${note_description}
-    Click Element    locator=//button[contains(.,'Create')]
-    #Try to use Scroll Element To View to see if it works instead of Arrow Down key
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_title}')])[12]
-    ${note_updated_at}    Get Text    //p[contains(@data-testid,'note-card-updated-at')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_description}${note_updated_at}')])[12]
+    Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
+    Click    selector=//button[contains(.,'Create')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible
+    ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible
     IF    ${note_completed} == 1
-        Checkbox Should Be Selected    locator=//input[@data-testid='toggle-note-switch']
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked
         #verify the header colors in the future
     ELSE
-        Checkbox Should Not Be Selected    locator=//input[@data-testid='toggle-note-switch']
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked
     END    
-    Click Element    locator=//a[contains(.,'View')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_title}')])[10]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_description}')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_updated_at}')]
+    Click    selector=//a[contains(.,'View')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible
+    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible
+    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible
     IF    ${note_completed} == 1
-        Checkbox Should Be Selected    locator=//input[@type='checkbox']
+        Wait For Elements State    selector=//input[@type='checkbox']    state=checked
     ELSE
-        Checkbox Should Not Be Selected    locator=//input[@type='checkbox']
+        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked
     END
-    Go To    url=https://practice.expandtesting.com/notes/app/
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    #Not able to get the note id part of the url because iframe took over. I can use get all notes request when mixing ui and api tests.
-    # Got note id using Get Element Attribute keyword
-    ${note_id_full_url_extension}    Get Element Attribute    locator=//a[contains(.,'View')]    attribute=href
+    Go To    https://practice.expandtesting.com/notes/app/
+    ${note_id_full_url_extension}    Get Attribute    selector=//a[contains(.,'View')]    attribute=href
     ${note_id}    Remove String    ${note_id_full_url_extension}    https://practice.expandtesting.com/notes/app/notes/
-    ${note_id_color}    Get Element Attribute    locator=//div[@data-testid='note-card-title']    attribute=style
+    ${note_id_color}    Get Attribute    selector=//div[@data-testid='note-card-title']    attribute=style
     IF    "${note_completed}" == "1"
         Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
     ELSE IF    "Home" == "${note_category}"
@@ -122,25 +89,11 @@ Delete a note via UI
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
     ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
-    Go To    url=https://practice.expandtesting.com/notes/app/
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Click Element    locator=//button[@data-testid='note-delete']
-    Click Element    locator=//button[@data-testid='note-delete-confirm']
-    Wait Until Page Does Not Contain Element    locator=(//div[contains(.,'${note_title}')])[12]    
+    Go To    https://practice.expandtesting.com/notes/app/
+    Click    selector=//button[@data-testid='note-delete']
+    Click    selector=//button[@data-testid='note-delete-confirm']
+    #did not work when selector is coded instead of xpath
+    Get Element Count    xpath=(//div[contains(.,'${note_title}')])[12]  ==  0           
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})

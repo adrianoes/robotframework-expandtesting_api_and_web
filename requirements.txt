@@ -1,6 +1,7 @@
 robotframework
-robotframework-seleniumlibrary
+robotframework-browser
 robotframework-requests
 robotframework-jsonlibrary
 robotframework-faker
 setuptools
+rfbrowser init

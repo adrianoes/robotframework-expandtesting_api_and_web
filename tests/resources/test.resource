@@ -1,11 +1,11 @@
 *** Settings ***
 
+Library    Browser
 Library    RequestsLibrary
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
 Library    FakerLibrary
-Library    SeleniumLibrary
 
 *** Keywords ***
 
@@ -155,93 +155,40 @@ logInUserViaUi(${bypassParalelismNumber})
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    Go To    url=https://practice.expandtesting.com/notes/app/login
-    Reload Page
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Input Text    locator=//input[@id='email']    text=${user_email}
-    Input Text    locator=//input[@id='password']    text=${user_password}
-    Click Button    locator=//button[contains(.,'Login')]
-    Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
-    Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    ${user_id}    Get Value    locator=//input[@data-testid='user-id']
-    ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
+    Go To    https://practice.expandtesting.com/notes/app/login
+    Fill Text    selector=//input[@id='email']    txt=${user_email}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Click    selector=//button[contains(.,'Login')]
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    Go To    https://practice.expandtesting.com/notes/app/profile
+    ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
+    ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
 deleteUserViaUi(${bypassParalelismNumber})
-    Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Click Button    locator=//button[contains(.,'Delete Account')]
-    Click Button    locator=//button[@data-testid='note-delete-confirm']
-    #My approach is to change the 'Wait Until Element is Visible' to Wait Until Page Contains Element like below. The reason to change to this keyword is that sometimes, the element is already loaded and available in DOM or page but the visibility is hidden. 
-    #Rmember to change in all the others assertions. Or use Wait Until Keyword Succeeds
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]
+    Go To    https://practice.expandtesting.com/notes/app/profile
+    Click    selector=//button[contains(.,'Delete Account')]
+    Click    selector=//button[@data-testid='note-delete-confirm']
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible
+
  
 createUserViaUi(${bypassParalelismNumber})   
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
-    # Chrome presents an error only in github actions when tests are ran in normal browser. Something related to chromedriver. So if tests run in headless the problem disappear. 
-    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
-    # To run the tests with UI, comment the line below and uncomment the line above. 
-    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
-    Maximize Browser Window
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Input Text    locator=//input[@id='email']    text=${user_email}
-    Input Text    locator=//input[@name='name']    text=${user_name}
-    Input Text    locator=//input[@id='password']    text=${user_password}
-    Input Text    locator=//input[@name='confirmPassword']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN 
-    Click Button    locator=//button[contains(.,'Register')]
-    Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
+    New Browser    headless=True    
+    #When headless, use the line above and not the 2 lines below
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
+    New Page    https://practice.expandtesting.com/notes/app/register
+    Fill Text    selector=//input[@id='email']    txt=${user_email}
+    Fill Text    selector=//input[@name='name']    txt=${user_name}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Fill Text    selector=//input[@name='confirmPassword']    txt=${user_password}
+    #Below command will be commented but left here to remind better applicability of Browser library instead of selenium library
+    # Scroll To Element    selector=//button[contains(.,'Register')]
+    Click    selector=//button[contains(.,'Register')]
+    Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
 
 createNoteViaUi(${bypassParalelismNumber}) 
@@ -263,72 +210,38 @@ createNoteViaUi(${bypassParalelismNumber})
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
     ${note_title}    FakerLibrary.Sentence    nb_words=3
-    Go To    url=https://practice.expandtesting.com/notes/app
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Click Element    locator=//button[contains(.,'+ Add Note')]
-    #It did not work with locator instead of xpath. Don't know why.
-    Select From List By Value    xpath=//select[@data-testid='note-category']    ${note_category}
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//div[@class='page-layout']
+    Click    selector=//button[contains(.,'+ Add Note')]
+    Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
-        Wait Until Keyword Succeeds    1 min    1 sec    Select Checkbox    locator=//input[@data-testid='note-completed']
+        Check Checkbox    selector=//input[@data-testid='note-completed']
     END  
-    Input Text    locator=//input[@data-testid='note-title']    text=${note_title}
-    Input Text    locator=//textarea[@data-testid='note-description']    text=${note_description}
-    Click Element    locator=//button[contains(.,'Create')]
-    #Try to use Scroll Element To View to see if it works instead of Arrow Down key
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_title}')])[12]
-    ${note_updated_at}    Get Text    //p[contains(@data-testid,'note-card-updated-at')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_description}${note_updated_at}')])[12]
+    Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
+    Click    selector=//button[contains(.,'Create')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible
+    ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible
     IF    ${note_completed} == 1
-        Checkbox Should Be Selected    locator=//input[@data-testid='toggle-note-switch']
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked
         #verify the header colors in the future
     ELSE
-        Checkbox Should Not Be Selected    locator=//input[@data-testid='toggle-note-switch']
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked
     END    
-    Click Element    locator=//a[contains(.,'View')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_title}')])[10]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_description}')]
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_updated_at}')]
+    Click    selector=//a[contains(.,'View')]
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible
+    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible
+    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible
     IF    ${note_completed} == 1
-        Checkbox Should Be Selected    locator=//input[@type='checkbox']
+        Wait For Elements State    selector=//input[@type='checkbox']    state=checked
     ELSE
-        Checkbox Should Not Be Selected    locator=//input[@type='checkbox']
+        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked
     END
-    Go To    url=https://practice.expandtesting.com/notes/app/
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    #Not able to get the note id part of the url because iframe took over. I can use get all notes request when mixing ui and api tests.
-    # Got note id using Get Element Attribute keyword
-    ${note_id_full_url_extension}    Get Element Attribute    locator=//a[contains(.,'View')]    attribute=href
+    Go To    https://practice.expandtesting.com/notes/app/
+    ${note_id_full_url_extension}    Get Attribute    selector=//a[contains(.,'View')]    attribute=href
     ${note_id}    Remove String    ${note_id_full_url_extension}    https://practice.expandtesting.com/notes/app/notes/
-    ${note_id_color}    Get Element Attribute    locator=//div[@data-testid='note-card-title']    attribute=style
+    ${note_id_color}    Get Attribute    selector=//div[@data-testid='note-card-title']    attribute=style
     IF    "${note_completed}" == "1"
         Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
     ELSE IF    "Home" == "${note_category}"

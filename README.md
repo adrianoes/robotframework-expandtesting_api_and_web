@@ -77,6 +77,8 @@ Check then both to add both options in context menu.
 - [How to Use IF and ELSE in Robot Framework](https://stackoverflow.com/a/72145975/10519428)
 - [Can't extract url value from ahref to variable](https://forum.robotframework.org/t/cant-extract-url-value-from-ahref-to-variable/3159/4)
 - [Unable to scroll down the web page using the Robot Framework](https://stackoverflow.com/questions/31947891/unable-to-scroll-down-the-web-page-using-the-robot-framework?rq=3)
+- [Maximize Browser Window | Browser Library | Robot Framework](https://www.youtube.com/watch?v=c80_sJUgIXQ)
+- [Examples Of Handling Checkbox Validations using the Browser Library in Robot Framework](https://www.linkedin.com/pulse/examples-handling-checkbox-validations-using-browser-library-kumar-g-jixec/)
 
 # Tips:
 
