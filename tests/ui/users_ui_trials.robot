@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource    ../resources/test.resource
+Resource    ../resources/test_trial.resource
 Library    SeleniumLibrary
 Library    JSONLibrary
 Library    OperatingSystem
@@ -15,31 +15,18 @@ Creates a new user account via UI
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
     # Chrome presents an error only in github actions when tests are ran in normal browser. Something related to chromedriver. So if tests run in headless the problem disappear. 
-    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome    options=add_argument("--no-sandbox")
+    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=chrome   
     # To run the tests with UI, comment the line below and uncomment the line above. 
-    Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
+    # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
     Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
     Input Text    locator=//input[@id='email']    text=${user_email}
+    Execute JavaScript    window.scrollTo(1, 250)
     Input Text    locator=//input[@name='name']    text=${user_name}
     Input Text    locator=//input[@id='password']    text=${user_password}
     Input Text    locator=//input[@name='confirmPassword']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN       
+    # Wait Until Keyword Succeeds    1 min    1 sec    Set Focus To Element    locator=//button[contains(.,'Register')]  
+    # Execute JavaScript    window.scrollTo(0, 250)  
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
@@ -62,27 +49,13 @@ Log in as an existing user via UI
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
     Go To    url=https://practice.expandtesting.com/notes/app/login    
-    Reload Page
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//button[contains(.,'Register')]
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@id='password']    text=${user_password}
     Click Button    locator=//button[contains(.,'Login')]
     Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
     Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//input[@data-testid='user-id']
     ${user_id}    Get Value    locator=//input[@data-testid='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
@@ -102,12 +75,7 @@ Retrieve user profile information via UI
     ${user_name_str}    Convert JSON To String	 ${user_name_data}
     ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
     Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//input[@data-testid='user-id']
     ${user_email_profile}    Get Value    locator=//input[@data-testid='user-email']
     # Log To Console    ${user_email_profile}
     ${user_name_profile}    Get Value    locator=//input[@data-testid='user-name']
@@ -132,19 +100,9 @@ Update user profile information via UI
     Input Text    locator=//input[@data-testid='user-company']    text=${updated_user_company}
     Input Text    locator=//input[@data-testid='user-name']    text=${updated_user_name}
     Input Text    locator=//input[@data-testid='user-phone']    text=${updated_user_phone}
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
     Click Button    locator=//button[contains(.,'Update profile')]
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@class='d-flex'][contains(.,'Profile updated successful')]
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//input[@data-testid='user-company']
     ${user_company_profile}    Get Value    locator=//input[@data-testid='user-company']
     ${user_email_profile}    Get Value    locator=//input[@data-testid='user-email']
     ${user_name_profile}    Get Value    locator=//input[@data-testid='user-name']
@@ -194,27 +152,7 @@ Delete user account via UI
     createUserViaUi(${bypassParalelismNumber}) 
     logInUserViaUi(${bypassParalelismNumber})
     Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[@data-testid='note-delete-confirm']
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]

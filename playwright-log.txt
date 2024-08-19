@@ -1,0 +1,127 @@
+{"level":30,"time":"2024-08-19T14:52:03.770Z","pid":20148,"hostname":"adrianoes","msg":"Listening on 50759"}
+(node:20148) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2024-08-19T14:52:04.273Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:04.273Z","pid":20148,"hostname":"adrianoes","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:04.277Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:04.278Z","pid":20148,"hostname":"adrianoes","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:04.293Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2024-08-19T14:52:04.601Z","pid":20148,"hostname":"adrianoes","msg":"Adding browser to stack: chromium, version: 128.0.6613.18"}
+{"level":30,"time":"2024-08-19T14:52:04.602Z","pid":20148,"hostname":"adrianoes","msg":"End of node method newBrowser"}
+{"level":30,"time":"2024-08-19T14:52:04.602Z","pid":20148,"hostname":"adrianoes","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2024-08-19T14:52:04.615Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:04.616Z","pid":20148,"hostname":"adrianoes","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-08-19T14:52:04.644Z","pid":20148,"hostname":"adrianoes","msg":"Changed active context"}
+{"level":30,"time":"2024-08-19T14:52:04.970Z","pid":20148,"hostname":"adrianoes","msg":"Video path: undefined"}
+{"level":30,"time":"2024-08-19T14:52:04.970Z","pid":20148,"hostname":"adrianoes","msg":"Changed active page"}
+{"level":30,"time":"2024-08-19T14:52:06.637Z","pid":20148,"hostname":"adrianoes","msg":"End of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:06.649Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:06.649Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@id='email'] in page."}
+{"level":30,"time":"2024-08-19T14:52:06.762Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:06.770Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:06.772Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@name='name'] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.016Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:07.026Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:07.026Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@id='password'] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.061Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:07.069Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:07.069Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@name='confirmPassword'] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.093Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:07.102Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:07.102Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Register')] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.234Z","pid":20148,"hostname":"adrianoes","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:07.246Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method click"}
+{"level":30,"time":"2024-08-19T14:52:07.247Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Register')] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.381Z","pid":20148,"hostname":"adrianoes","msg":"End of node method click"}
+{"level":30,"time":"2024-08-19T14:52:07.392Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:07.393Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //b[contains(.,'User account created successfully')] in page."}
+{"level":30,"time":"2024-08-19T14:52:07.828Z","pid":20148,"hostname":"adrianoes","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:08.312Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:08.312Z","pid":20148,"hostname":"adrianoes","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-08-19T14:52:08.507Z","pid":20148,"hostname":"adrianoes","msg":"Video path: undefined"}
+{"level":30,"time":"2024-08-19T14:52:08.507Z","pid":20148,"hostname":"adrianoes","msg":"Changed active page"}
+{"level":30,"time":"2024-08-19T14:52:11.713Z","pid":20148,"hostname":"adrianoes","msg":"End of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:11.725Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:11.725Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@id='email'] in page."}
+{"level":30,"time":"2024-08-19T14:52:11.957Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:11.973Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:11.973Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@id='password'] in page."}
+{"level":30,"time":"2024-08-19T14:52:12.052Z","pid":20148,"hostname":"adrianoes","msg":"End of node method fillText"}
+{"level":30,"time":"2024-08-19T14:52:12.063Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:12.063Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Login')] in page."}
+{"level":30,"time":"2024-08-19T14:52:12.179Z","pid":20148,"hostname":"adrianoes","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:12.190Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method click"}
+{"level":30,"time":"2024-08-19T14:52:12.190Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Login')] in page."}
+{"level":30,"time":"2024-08-19T14:52:13.214Z","pid":20148,"hostname":"adrianoes","msg":"End of node method click"}
+{"level":30,"time":"2024-08-19T14:52:13.225Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:13.225Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //a[contains(.,'MyNotes')] in page."}
+{"level":30,"time":"2024-08-19T14:52:14.130Z","pid":20148,"hostname":"adrianoes","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:14.144Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:14.144Z","pid":20148,"hostname":"adrianoes","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-08-19T14:52:14.226Z","pid":20148,"hostname":"adrianoes","msg":"Video path: undefined"}
+{"level":30,"time":"2024-08-19T14:52:14.226Z","pid":20148,"hostname":"adrianoes","msg":"Changed active page"}
+{"level":30,"time":"2024-08-19T14:52:16.309Z","pid":20148,"hostname":"adrianoes","msg":"End of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:16.315Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:16.315Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@data-testid='user-id'] in page."}
+{"level":30,"time":"2024-08-19T14:52:16.573Z","pid":20148,"hostname":"adrianoes","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:16.582Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method getElementAttribute"}
+{"level":30,"time":"2024-08-19T14:52:16.588Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //input[@data-testid='user-id'] in page."}
+{"level":30,"time":"2024-08-19T14:52:16.649Z","pid":20148,"hostname":"adrianoes","msg":"Retrieved attribute for element //input[@data-testid='user-id'] containing 66c35c17c99d1a014d49f096"}
+{"level":30,"time":"2024-08-19T14:52:16.649Z","pid":20148,"hostname":"adrianoes","msg":"End of node method getElementAttribute"}
+{"level":30,"time":"2024-08-19T14:52:16.661Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-08-19T14:52:16.692Z","pid":20148,"hostname":"adrianoes","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-08-19T14:52:16.790Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:16.790Z","pid":20148,"hostname":"adrianoes","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-08-19T14:52:16.929Z","pid":20148,"hostname":"adrianoes","msg":"Video path: undefined"}
+{"level":30,"time":"2024-08-19T14:52:16.929Z","pid":20148,"hostname":"adrianoes","msg":"Changed active page"}
+{"level":30,"time":"2024-08-19T14:52:19.358Z","pid":20148,"hostname":"adrianoes","msg":"End of node method newPage"}
+{"level":30,"time":"2024-08-19T14:52:19.369Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:19.369Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Delete Account')] in page."}
+{"level":30,"time":"2024-08-19T14:52:19.608Z","pid":20148,"hostname":"adrianoes","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2024-08-19T14:52:19.621Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method click"}
+{"level":30,"time":"2024-08-19T14:52:19.621Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[contains(.,'Delete Account')] in page."}
+{"level":30,"time":"2024-08-19T14:52:19.740Z","pid":20148,"hostname":"adrianoes","msg":"End of node method click"}
+{"level":30,"time":"2024-08-19T14:52:19.747Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method click"}
+{"level":30,"time":"2024-08-19T14:52:19.747Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //button[@data-testid='note-delete-confirm'] in page."}
+{"level":30,"time":"2024-08-19T14:52:19.954Z","pid":20148,"hostname":"adrianoes","msg":"End of node method click"}
+{"level":30,"time":"2024-08-19T14:52:19.960Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:19.960Z","pid":20148,"hostname":"adrianoes","msg":"Strict mode is enabled, find Locator with //div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')] in page."}
+{"level":30,"time":"2024-08-19T14:52:21.241Z","pid":20148,"hostname":"adrianoes","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-08-19T14:52:21.261Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2024-08-19T14:52:21.334Z","pid":20148,"hostname":"adrianoes","msg":"Removed page=dee7a515-e2cb-4d4f-9526-62c60d190e9c from context=2c1c7e00-4ba2-4c83-9782-99f375ebcd94 page stack"}
+{"level":30,"time":"2024-08-19T14:52:21.357Z","pid":20148,"hostname":"adrianoes","msg":"Removed page=34cbe954-5dba-44ca-88ab-1415b5a36a00 from context=2c1c7e00-4ba2-4c83-9782-99f375ebcd94 page stack"}
+{"level":30,"time":"2024-08-19T14:52:21.393Z","pid":20148,"hostname":"adrianoes","msg":"Removed page=0ab126d6-4dbe-4d30-a9f3-af374b444da9 from context=2c1c7e00-4ba2-4c83-9782-99f375ebcd94 page stack"}
+{"level":30,"time":"2024-08-19T14:52:21.416Z","pid":20148,"hostname":"adrianoes","msg":"Removed page=668f9d23-7c8c-4165-9dde-5798b99991c9 from context=2c1c7e00-4ba2-4c83-9782-99f375ebcd94 page stack"}
+{"level":30,"time":"2024-08-19T14:52:22.005Z","pid":20148,"hostname":"adrianoes","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
+    at PlaywrightServer.setTimeout (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
+    at Object.onReceiveHalfClose (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
+    at ServerHttp2Stream.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+=============================================================
+{"level":30,"time":"2024-08-19T14:52:22.085Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:22.085Z","pid":20148,"hostname":"adrianoes","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
+    at PlaywrightServer.setTimeout (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
+    at Object.onReceiveHalfClose (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\adria\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
+    at ServerHttp2Stream.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+=============================================================
+{"level":30,"time":"2024-08-19T14:52:22.162Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:22.162Z","pid":20148,"hostname":"adrianoes","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-08-19T14:52:24.265Z","pid":20148,"hostname":"adrianoes","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-08-19T14:52:24.265Z","pid":20148,"hostname":"adrianoes","msg":"End of node method closeAllBrowsers"}

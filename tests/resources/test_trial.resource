@@ -156,54 +156,30 @@ logInUserViaUi(${bypassParalelismNumber})
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
     Go To    url=https://practice.expandtesting.com/notes/app/login
-    Reload Page
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@id='password']    text=${user_password}
+    ${login_pos_y}    Get Vertical Position    locator=//button[contains(.,'Login')]
+    ${login_pos_x}    Get Horizontal Position    locator=//button[contains(.,'Login')]
+    Log To Console    ${login_pos_x}
+    Log To Console    ${login_pos_y}
+    Execute JavaScript    window.scrollTo(0, ${login_pos_y})  
     Click Button    locator=//button[contains(.,'Login')]
     Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
     Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    ${user_id_pos_y}    Get Vertical Position    locator=//input[@data-testid='user-id']
+    ${user_id_pos_x}    Get Horizontal Position    locator=//input[@data-testid='user-id']
+    Execute JavaScript    window.scrollTo(${user_id_pos_x}, ${user_id_pos_y})   
     ${user_id}    Get Value    locator=//input[@data-testid='user-id']
     ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
 deleteUserViaUi(${bypassParalelismNumber})
     Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    ${del_pos_y}    Get Vertical Position    locator=//button[contains(.,'Delete Account')]
+    ${del_pos_x}    Get Horizontal Position    locator=//button[contains(.,'Delete Account')]
+    Log To Console    ${del_pos_x}
+    Log To Console    ${del_pos_y}
+    Execute JavaScript    window.scrollTo(${del_pos_x}, 859) 
     Click Button    locator=//button[contains(.,'Delete Account')]
     Click Button    locator=//button[@data-testid='note-delete-confirm']
     #My approach is to change the 'Wait Until Element is Visible' to Wait Until Page Contains Element like below. The reason to change to this keyword is that sometimes, the element is already loaded and available in DOM or page but the visibility is hidden. 
@@ -219,27 +195,12 @@ createUserViaUi(${bypassParalelismNumber})
     # To run the tests with UI, comment the line below and uncomment the line above. 
     # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//input[@id='email']
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@name='name']    text=${user_name}
     Input Text    locator=//input[@id='password']    text=${user_password}
     Input Text    locator=//input[@name='confirmPassword']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN 
+    Scroll Element Into View    locator=//button[contains(.,'Register')]
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}

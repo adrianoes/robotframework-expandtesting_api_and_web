@@ -1,11 +1,12 @@
 *** Settings ***
 
+Library    Browser
 Library    RequestsLibrary
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
 Library    FakerLibrary
-Library    SeleniumLibrary
+
 
 *** Keywords ***
 
@@ -155,60 +156,25 @@ logInUserViaUi(${bypassParalelismNumber})
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    Go To    url=https://practice.expandtesting.com/notes/app/login
-    Reload Page
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Input Text    locator=//input[@id='email']    text=${user_email}
-    Input Text    locator=//input[@id='password']    text=${user_password}
-    Click Button    locator=//button[contains(.,'Login')]
-    Wait Until Element Is Visible    locator=//a[contains(.,'MyNotes')]
-    Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    ${user_id}    Get Value    locator=//input[@data-testid='user-id']
-    ${user_token}    Execute Javascript   return window["localStorage"].getItem("token")  
+    New Page    https://practice.expandtesting.com/notes/app/login
+    Fill Text    selector=//input[@id='email']    txt=${user_email}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Scroll To Element    selector=//button[contains(.,'Login')]
+    Click    selector=//button[contains(.,'Login')]
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    New Page    https://practice.expandtesting.com/notes/app/profile
+    Scroll To Element    selector=//input[@data-testid='user-id']
+    ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
+    ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
 deleteUserViaUi(${bypassParalelismNumber})
-    Go To    url=https://practice.expandtesting.com/notes/app/profile
-    Click Element    locator=//div[@class='page-layout']
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Click Button    locator=//button[contains(.,'Delete Account')]
-    Click Button    locator=//button[@data-testid='note-delete-confirm']
-    #My approach is to change the 'Wait Until Element is Visible' to Wait Until Page Contains Element like below. The reason to change to this keyword is that sometimes, the element is already loaded and available in DOM or page but the visibility is hidden. 
-    #Rmember to change in all the others assertions. Or use Wait Until Keyword Succeeds
-    Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    locator=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]
+    New Page    https://practice.expandtesting.com/notes/app/profile
+    Scroll To Element    selector=//button[contains(.,'Delete Account')]
+    Click    selector=//button[contains(.,'Delete Account')]
+    Click    selector=//button[@data-testid='note-delete-confirm']
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible
+
  
 createUserViaUi(${bypassParalelismNumber})   
     ${user_email}    FakerLibrary.Email
@@ -219,27 +185,12 @@ createUserViaUi(${bypassParalelismNumber})
     # To run the tests with UI, comment the line below and uncomment the line above. 
     # Open Browser    url=https://practice.expandtesting.com/notes/app/register    browser=headlesschrome    options=add_argument("--no-sandbox")
     Maximize Browser Window
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
+    Scroll Element Into View    locator=//input[@id='email']
     Input Text    locator=//input[@id='email']    text=${user_email}
     Input Text    locator=//input[@name='name']    text=${user_name}
     Input Text    locator=//input[@id='password']    text=${user_password}
     Input Text    locator=//input[@name='confirmPassword']    text=${user_password}
-    Click Element    locator=//div[@class='page-layout']
-    #Iframe covers Register button and no other keywords like Scrol Element To View or Click Button. I can create a keyword for this action and adapt it according to each need. 
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN
-    Press Keys  None  ARROW_DOWN 
+    Scroll Element Into View    locator=//button[contains(.,'Register')]
     Click Button    locator=//button[contains(.,'Register')]
     Wait Until Element Is Visible    locator=//b[contains(.,'User account created successfully')]
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}

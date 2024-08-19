@@ -6,6 +6,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 
 | Requirement                     | Version        | Note                                                            |
 | :------------------------------ |:---------------| :-------------------------------------------------------------- |
+| Node.js                         | 18.18.0        | -                                                               |
 | Python                          | 3.12.5         | -                                                               |
 | Visual Studio Code              | 1.89.1         | -                                                               |
 | Robot Framework                 | 7.0.1          | -                                                               | 
@@ -22,6 +23,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 
 # Installation:
 
+- See [Node.js page](https://nodejs.org/en) and install the aforementioned Node.js version. Keep all the preferenced options as they are.
 - See [python page](https://www.python.org/downloads/) and download the latest Python stable version. Start the installation and check the checkboxes below: 
   - :white_check_mark: Use admin privileges when installing py.exe 
   - :white_check_mark: Add python.exe to PATH
@@ -31,7 +33,7 @@ and keep all the other preferenced options as they are.
   - :white_check_mark: Add "Open with code" action to Windows Explorer directory context menu.
 Check then both to add both options in context menu.
 - Open windows propmpt as admin and execute ```pip install robotframework``` to install Robot Framework.
-- Open windows propmpt as admin and execute ```pip install robotframework-seleniumlibrary``` to install SeleniumLibrary.
+- Open windows propmpt as admin and execute ```pip install robotframework-browser``` to install Browser library.
 - Open windows propmpt as admin and execute ```pip install robotframework-requests``` to install RequestsLibrary.
 - Open windows propmpt as admin and execute ```pip install robotframework-jsonlibrary``` to install JSONLibrary.
 - Open windows propmpt as admin and execute ```pip install robotframework-faker``` to install robotframework-faker.
@@ -43,8 +45,10 @@ Check then both to add both options in context menu.
 - See [geckodriver page](https://github.com/mozilla/geckodriver/releases) and download the geckodriver related to your system's capabilities.
 - Unzip both Chrome and Firefox drivers inside Python scripts folder (C:\Users\user_name\AppData\Local\Programs\Python\Python312\Scripts). This folder must be configured in windows environment varibles.
 - See [TruePath page](https://chromewebstore.google.com/detail/truepath/mgjhkhhbkkldiihlajcnlfchfcmhipmn?hl=pt-BR) and install TruePath extension.
+- Execute ```rfbrowser init``` to initialize the Browser library.
 
 # Tests:
+
 
 - Execute ```robot -d ./results tests``` to run tests in headless mode and store results in separated folder.
 - Execute ```robot -d ./results -t "Change a user\'s password via UI" tests/ui/users_ui.robot``` to run Change a user's password via UI test case inside users_ui.robot suite and store results in separated folder.
@@ -71,6 +75,7 @@ Check then both to add both options in context menu.
 - [How to use IF ELSE in Robot Framework #12](https://www.youtube.com/watch?v=NcLXjVz163A)
 - [How to Use IF and ELSE in Robot Framework](https://stackoverflow.com/a/72145975/10519428)
 - [Can't extract url value from ahref to variable](https://forum.robotframework.org/t/cant-extract-url-value-from-ahref-to-variable/3159/4)
+- [Unable to scroll down the web page using the Robot Framework](https://stackoverflow.com/questions/31947891/unable-to-scroll-down-the-web-page-using-the-robot-framework?rq=3)
 
 # Tips:
 

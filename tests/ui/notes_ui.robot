@@ -77,6 +77,7 @@ Create a new note via UI
     ELSE
         Checkbox Should Not Be Selected    locator=//input[@data-testid='toggle-note-switch']
     END    
+    Click Element    locator=//a[contains(.,'View')]
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    (//div[contains(.,'${note_title}')])[10]
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_description}')]
     Wait Until Keyword Succeeds    1 min    1 sec    Wait Until Element Is Visible    //p[contains(.,'${note_updated_at}')]
@@ -85,6 +86,7 @@ Create a new note via UI
     ELSE
         Checkbox Should Not Be Selected    locator=//input[@type='checkbox']
     END
+    Go To    url=https://practice.expandtesting.com/notes/app/
     Click Element    locator=//div[@class='page-layout']
     Press Keys  None  ARROW_DOWN
     Press Keys  None  ARROW_DOWN
@@ -107,6 +109,38 @@ Create a new note via UI
     END 
     # Log To Console    ${note_id_color}
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    deleteUserViaUi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
+Delete a note via UI
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${bypassParalelismNumber}) 
+    logInUserViaUi(${bypassParalelismNumber}) 
+    createNoteViaUi(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${note_title_data}    Get Value From Json    ${data}    $.note_title
+    ${note_title_str}    Convert JSON To String	 ${note_title_data}
+    ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
+    Go To    url=https://practice.expandtesting.com/notes/app/
+    Click Element    locator=//div[@class='page-layout']
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Press Keys  None  ARROW_DOWN
+    Click Element    locator=//button[@data-testid='note-delete']
+    Click Element    locator=//button[@data-testid='note-delete-confirm']
+    Wait Until Page Does Not Contain Element    locator=(//div[contains(.,'${note_title}')])[12]    
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
