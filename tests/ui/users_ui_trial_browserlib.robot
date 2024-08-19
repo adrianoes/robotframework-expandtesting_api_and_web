@@ -30,5 +30,5 @@ Creates a new user account via UI
     logInUserViaUi(${bypassParalelismNumber})
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
-    # deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${bypassParalelismNumber})
 
