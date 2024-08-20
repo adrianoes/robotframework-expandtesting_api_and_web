@@ -8,7 +8,7 @@ Library    JSONLibrary
 Library    OperatingSystem
 Library    String
 Library    FakerLibrary  
-Library    Collections  
+Library    Collections
 
 *** Test Cases ***
 
@@ -92,8 +92,8 @@ Get all notes via UI
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${note_category_last_element}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
-    ${arrayCategory}    Create List    Home   Work    Personal    ${note_category_last_element}    
-    ${arrayCompleted}    Create List    0    0    0    1
+    ${arrayCategory}    Create List    ${note_category_last_element}    Home   Work    Personal        
+    ${arrayCompleted}    Create List    1    0    0    0
     ${note_description_1}    FakerLibrary.Sentence  nb_words=5
     ${note_description_2}    FakerLibrary.Sentence  nb_words=5
     ${note_description_3}    FakerLibrary.Sentence  nb_words=5
@@ -123,43 +123,39 @@ Get all notes via UI
         Click    selector=//button[contains(.,'Create')]    
         Log To Console    ${note_category}
         Log To Console    ${note_completed}
+    END       
+    FOR    ${i}    IN RANGE    1    5                
+        ${note_updated_at}    Get Text    xpath=(//p[@data-testid='note-card-updated-at'])[5-${i}]  
+        Set List Value     ${arrayNoteUpdatedAt}    ${i-1}    ${note_updated_at} 
+        Log To Console    ${note_updated_at} 
+        Log To Console    ${arrayNoteUpdatedAt} 
     END
-    # ${index}    Create List    ${1}    ${2}    ${3}    ${4}
-    # FOR    ${i}    IN    ${index}            
-    #     ${note_updated_at}    Get Text    xpath=(//p[@data-testid='note-card-updated-at'])[${i}]  
-    #     Set List Value     ${arrayNoteUpdatedAt}    ${i}    ${note_updated_at} 
-    #     Log To Console    ${note_updated_at}  
-    # END
-    # ${arrayIndex}    Create List    3    2    1    4
-    # FOR    ${i}    IN RANGE    ${4} 
-    #     ${index}    Get From List    ${arrayIndex}    ${i}  
-    #     ${note_category}    Get From List    ${arrayCategory}    ${index}       
-    #     ${note_completed}    Get From List    ${arrayCompleted}    ${index}
-    #     ${note_description}    Get From List    ${arrayDescription}    ${index}
-    #     ${note_title}    Get From List    ${arraytitle}    ${index}      
-    #     #It catches the value using i and not index because value is not inputed but generated after creating the note, so it has its on FOR which already puts in the i order.
-    #     ${note_updated_at}    Get From List    ${arrayNoteUpdatedAt}    ${i}
-    #     Log To Console    ${note_updated_at}
-    #     Wait For Elements State    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    state=visible
-    #     ${note_id_color}    Get Attribute    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    attribute=style
-    #     IF    "${note_completed}" == "1"
-    #         Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
-    #     ELSE IF    "Home" == "${note_category}"
-    #         Should Be Equal    ${note_id_color}    background-color: rgb(255, 145, 0); color: rgb(255, 255, 255);
-    #     ELSE IF    "Personal" == "${note_category}"
-    #         Should Be Equal    ${note_id_color}    background-color: rgb(50, 140, 160); color: rgb(255, 255, 255);
-    #     ELSE
-    #         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
-    #     END 
-    #     Wait For Elements State    selector=(//div[@class='card-body d-flex flex-column'])[${i}][contains(.,'${note_title}${note_updated_at}')]    state=visible
-    #     IF    ${note_completed} == 1
-    #         Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=checked
-    #     #verify the header colors in the future
-    #     ELSE
-    #         Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked
-    #     END 
-    # (//div[contains(.,'personal title')])[12]
-    # END
+    FOR    ${i}    IN RANGE    1    5   
+    #Still don't know why it must be 5 here instead of 4. Contact me if you know. Get -i vlue so starts from the end of the list, which has the first created values. 
+        ${note_category}    Get From List    ${arrayCategory}    -${i}      
+        ${note_completed}    Get From List    ${arrayCompleted}    -${i}
+        ${note_description}    Get From List    ${arrayDescription}    -${i}
+        ${note_title}    Get From List    ${arraytitle}    -${i}      
+        ${note_updated_at}    Get From List    ${arrayNoteUpdatedAt}    -${i}
+        Wait For Elements State    (//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    state=visible
+        ${note_id_color}    Get Attribute    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    attribute=style
+        IF    "${note_completed}" == "1"
+            Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
+        ELSE IF    "Home" == "${note_category}"
+            Should Be Equal    ${note_id_color}    background-color: rgb(255, 145, 0); color: rgb(255, 255, 255);
+        ELSE IF    "Personal" == "${note_category}"
+            Should Be Equal    ${note_id_color}    background-color: rgb(50, 140, 160); color: rgb(255, 255, 255);
+        ELSE
+            Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
+        END 
+        Wait For Elements State    selector=(//div[@class='card-body d-flex flex-column'])[${i}][contains(.,'${note_description}${note_updated_at}')]    state=visible
+        IF    ${note_completed} == 1
+            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=checked
+        #verify the header colors in the future
+        ELSE
+            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked
+        END 
+    END
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})

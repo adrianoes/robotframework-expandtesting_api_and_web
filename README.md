@@ -38,14 +38,8 @@ Check then both to add both options in context menu.
 - Open windows propmpt as admin and execute ```pip install robotframework-jsonlibrary``` to install JSONLibrary.
 - Open windows propmpt as admin and execute ```pip install robotframework-faker``` to install robotframework-faker.
 - Open windows propmpt as admin and execute ```pip install setuptools``` to install setuptools package.
+- Open windows propmpt as admin and execute ```rfbrowser init``` to initialize the Browser library.
 - Look for Robot Framework Language Server in the extensions marketplace and install the one from Robocorp.
-- See [chrome page](https://www.google.com/chrome/dr/download/) and install Chrome browser.
-- See [firefox page](https://www.mozilla.org/pt-BR/firefox/new/) and install Firefox browser.
-- See [chromedriver page](https://googlechromelabs.github.io/chrome-for-testing/) and look for the binary file of the chromedriver that has same version of your Chrome browser, copy its URL and paste it in chrome browser. Donwload is supposed to start automatically.
-- See [geckodriver page](https://github.com/mozilla/geckodriver/releases) and download the geckodriver related to your system's capabilities.
-- Unzip both Chrome and Firefox drivers inside Python scripts folder (C:\Users\user_name\AppData\Local\Programs\Python\Python312\Scripts). This folder must be configured in windows environment varibles.
-- See [TruePath page](https://chromewebstore.google.com/detail/truepath/mgjhkhhbkkldiihlajcnlfchfcmhipmn?hl=pt-BR) and install TruePath extension.
-- Execute ```rfbrowser init``` to initialize the Browser library.
 
 # Tests:
 
