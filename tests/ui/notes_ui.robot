@@ -2,7 +2,8 @@
 
 Resource    ../resources/test.resource
 
-Library    Browser
+Library    Browser    
+ 
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
@@ -76,6 +77,89 @@ Create a new note via UI
     END 
     # Log To Console    ${note_id_color}
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    deleteUserViaUi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
+Get all notes via UI
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${bypassParalelismNumber})
+    logInUserViaUi(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    #token us read for when we want to use api custom commands to help ui tests.
+    ${user_token_data}    Get Value From Json    ${data}    $.user_token
+    ${user_token_str}    Convert JSON To String	 ${user_token_data}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
+    ${note_category_last_element}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
+    ${arrayCategory}    Create List    Home   Work    Personal    ${note_category_last_element}    
+    ${arrayCompleted}    Create List    0    0    0    1
+    ${note_description_1}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_2}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_3}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_4}    FakerLibrary.Sentence  nb_words=5
+    ${arrayDescription}    Create List    ${note_description_1}    ${note_description_2}    ${note_description_3}    ${note_description_4}
+    ${note_title_1}    FakerLibrary.Sentence  nb_words=3
+    ${note_title_2}    FakerLibrary.Sentence  nb_words=3
+    ${note_title_3}    FakerLibrary.Sentence  nb_words=3
+    ${note_title_4}    FakerLibrary.Sentence  nb_words=3
+    ${arrayTitle}    Create List    ${note_title_1}    ${note_title_2}    ${note_title_3}    ${note_title_4}
+    ${arrayNoteUpdatedAt}    Create List    ${0}    ${0}    ${0}    ${0}
+    ${arrayNoteId}    Create List    ${0}    ${0}    ${0}    ${0}
+    FOR    ${i}    IN RANGE    ${4}        
+        ${note_category}    Get From List    ${arrayCategory}    ${i}       
+        ${note_completed}    Get From List    ${arrayCompleted}    ${i}
+        ${note_description}    Get From List    ${arrayDescription}    ${i}
+        ${note_title}    Get From List    ${arraytitle}    ${i}
+        Go To    https://practice.expandtesting.com/notes/app
+        Click    selector=//div[@class='page-layout']
+        Click    selector=//button[contains(.,'+ Add Note')]
+        Select Options By    data-testid=note-category    value    ${note_category}    
+        IF    ${note_completed} == 1
+            Check Checkbox    selector=//input[@data-testid='note-completed']
+        END  
+        Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
+        Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
+        Click    selector=//button[contains(.,'Create')]    
+        Log To Console    ${note_category}
+        Log To Console    ${note_completed}
+    END
+    # ${index}    Create List    ${1}    ${2}    ${3}    ${4}
+    # FOR    ${i}    IN    ${index}            
+    #     ${note_updated_at}    Get Text    xpath=(//p[@data-testid='note-card-updated-at'])[${i}]  
+    #     Set List Value     ${arrayNoteUpdatedAt}    ${i}    ${note_updated_at} 
+    #     Log To Console    ${note_updated_at}  
+    # END
+    # ${arrayIndex}    Create List    3    2    1    4
+    # FOR    ${i}    IN RANGE    ${4} 
+    #     ${index}    Get From List    ${arrayIndex}    ${i}  
+    #     ${note_category}    Get From List    ${arrayCategory}    ${index}       
+    #     ${note_completed}    Get From List    ${arrayCompleted}    ${index}
+    #     ${note_description}    Get From List    ${arrayDescription}    ${index}
+    #     ${note_title}    Get From List    ${arraytitle}    ${index}      
+    #     #It catches the value using i and not index because value is not inputed but generated after creating the note, so it has its on FOR which already puts in the i order.
+    #     ${note_updated_at}    Get From List    ${arrayNoteUpdatedAt}    ${i}
+    #     Log To Console    ${note_updated_at}
+    #     Wait For Elements State    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    state=visible
+    #     ${note_id_color}    Get Attribute    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    attribute=style
+    #     IF    "${note_completed}" == "1"
+    #         Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
+    #     ELSE IF    "Home" == "${note_category}"
+    #         Should Be Equal    ${note_id_color}    background-color: rgb(255, 145, 0); color: rgb(255, 255, 255);
+    #     ELSE IF    "Personal" == "${note_category}"
+    #         Should Be Equal    ${note_id_color}    background-color: rgb(50, 140, 160); color: rgb(255, 255, 255);
+    #     ELSE
+    #         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
+    #     END 
+    #     Wait For Elements State    selector=(//div[@class='card-body d-flex flex-column'])[${i}][contains(.,'${note_title}${note_updated_at}')]    state=visible
+    #     IF    ${note_completed} == 1
+    #         Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=checked
+    #     #verify the header colors in the future
+    #     ELSE
+    #         Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked
+    #     END 
+    # (//div[contains(.,'personal title')])[12]
+    # END
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
