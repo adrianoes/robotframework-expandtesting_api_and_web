@@ -176,10 +176,10 @@ createUserViaUi(${bypassParalelismNumber})
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
-    # New Browser    headless=True    
+    New Browser    headless=True    
     #When headless, use the line above and not the 2 lines below
-    New Browser    headless=False    args=["--start-maximized"]
-    New Context    viewport=${None}
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
     New Page    https://practice.expandtesting.com/notes/app/register
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
