@@ -10,7 +10,7 @@ Library    Collections
 
 *** Test Cases ***
 
-Create a new note via UI
+Create a new note via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -82,7 +82,7 @@ Create a new note via UI
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Get all notes via UI
+Get all notes via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -161,7 +161,7 @@ Get all notes via UI
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Update an existing note via UI
+Update an existing note via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -202,7 +202,7 @@ Update an existing note via UI
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Update the completed status of a note via UI
+Update the completed status of a note via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -240,7 +240,7 @@ Update the completed status of a note via UI
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Delete a note via UI
+Delete a note via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber}) 

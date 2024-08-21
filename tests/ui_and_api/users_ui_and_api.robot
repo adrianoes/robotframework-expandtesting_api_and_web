@@ -26,9 +26,15 @@ Creates a new user account via UI and API
     #Below command will be commented but left here to remind better applicability of Browser library instead of selenium library
     # Scroll To Element    selector=//button[contains(.,'Register')]
     Click    selector=//button[contains(.,'Register')]
+    ${resp}    Wait For Response    matcher=https://practice.expandtesting.com/notes/api/users/register
+    ${body}    Set Variable    ${resp["body"]}
+    ${body_str}    Convert To String	 ${body}
+    ${user_id_partial}    Fetch From Left    ${body_str}    ', 'name': 
+    ${user_id}    Fetch From Right    ${user_id_partial}    'id': '       
+    # Log To Console      ${user_id}
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
-    logInUserViaApi_without_user_id(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    logInUserViaApi(${bypassParalelismNumber})
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -40,6 +46,9 @@ Log in as an existing user via UI and API
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_id_data}    Get Value From Json    ${data}    $.user_id
+    ${user_id_str}    Convert JSON To String	 ${user_id_data}
+    ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
     ${user_name_data}    Get Value From Json    ${data}    $.user_name
     ${user_name_str}    Convert JSON To String	 ${user_name_data}
     ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
@@ -56,7 +65,8 @@ Log in as an existing user via UI and API
     Click    selector=//button[contains(.,'Login')]
     Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
     Go To    https://practice.expandtesting.com/notes/app/profile
-    ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
+    # After concluding this method to grab user_id, other one catching it in the response was implemented. This one will remain here so both ways were presented.
+    # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
     deleteUserViaApi(${bypassParalelismNumber})

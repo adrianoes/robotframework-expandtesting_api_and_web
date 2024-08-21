@@ -59,16 +59,15 @@ Check then both to add both options in context menu.
 - [No module named 'pkg_resources'](https://cursos.alura.com.br/forum/topico-problemas-com-a-library-no-robot-339325)
 - [InsecureRequestWarning: Unverified HTTPS request is being made in Robot Framework.](https://stackoverflow.com/a/45223128/10519428)
 - [How can i get the Local Storage data using "Execute Javascript" Keyword in Robot Framework](https://stackoverflow.com/a/73624779/10519428)
-- [WebDriverException: unknown error: DevToolsActivePort file doesn't exist while trying to initiate Chrome Browser](https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t)
 - [How to perform a FOR loop in the Robot Framework!?](https://www.youtube.com/watch?v=j6AB2Rh4mKw)
 - [Set List Value](https://robotframework.org/robotframework/latest/libraries/Collections.html#Set%20List%20Value)
-- [Element not visible sometimes with Robot Framework](https://stackoverflow.com/a/33317412/10519428)
 - [How to use IF ELSE in Robot Framework #12](https://www.youtube.com/watch?v=NcLXjVz163A)
 - [How to Use IF and ELSE in Robot Framework](https://stackoverflow.com/a/72145975/10519428)
 - [Can't extract url value from ahref to variable](https://forum.robotframework.org/t/cant-extract-url-value-from-ahref-to-variable/3159/4)
-- [Unable to scroll down the web page using the Robot Framework](https://stackoverflow.com/questions/31947891/unable-to-scroll-down-the-web-page-using-the-robot-framework?rq=3)
 - [Maximize Browser Window | Browser Library | Robot Framework](https://www.youtube.com/watch?v=c80_sJUgIXQ)
 - [Examples Of Handling Checkbox Validations using the Browser Library in Robot Framework](https://www.linkedin.com/pulse/examples-handling-checkbox-validations-using-browser-library-kumar-g-jixec/)
+- [Wait for Response - how to get status_code](https://forum.robotframework.org/t/wait-for-response-how-to-get-status-code/4540)
+- [Fetch From Left](https://robotframework.org/robotframework/latest/libraries/String.html#Fetch%20From%20Left)
 
 # Tips:
 
