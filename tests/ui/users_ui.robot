@@ -71,7 +71,6 @@ Retrieve user profile information via UI
     ${user_name_str}    Convert JSON To String	 ${user_name_data}
     ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
     Go To    https://practice.expandtesting.com/notes/app/profile
-    Click    selector=//div[@class='page-layout']
     ${user_email_profile}    Get Attribute    selector=//input[@data-testid='user-email']    attribute=value
     ${user_name_profile}    Get Attribute    selector=//input[@data-testid='user-name']    attribute=value
     Should Be Equal    ${user_email}    ${user_email_profile}

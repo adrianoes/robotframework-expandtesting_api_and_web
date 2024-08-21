@@ -205,6 +205,9 @@ createNoteViaUi(${bypassParalelismNumber})
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
+    ${user_token_data}    Get Value From Json    ${data}    $.user_token
+    ${user_token_str}    Convert JSON To String	 ${user_token_data}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
@@ -252,5 +255,67 @@ createNoteViaUi(${bypassParalelismNumber})
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
     # Log To Console    ${note_id_color}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+
+logInUserViaApi_without_user_id(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${user_email_data}    Get Value From Json    ${data}    $.user_email
+    ${user_email_str}    Convert JSON To String	 ${user_email_data}
+    ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_name_data}    Get Value From Json    ${data}    $.user_name
+    ${user_name_str}    Convert JSON To String	 ${user_name_data}
+    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
+    ${user_password_data}    Get Value From Json    ${data}    $.user_password
+    ${user_password_str}    Convert JSON To String	 ${user_password_data}
+    ${user_password}    Remove String    ${user_password_str}    [    ]    '    " 
+    ${data}    Create Dictionary    email=${user_email}    password=${user_password}
+    ${header}    Create Dictionary    content-type=application/x-www-form-urlencoded
+    Create Session    alias=expandtesting    url=https://practice.expandtesting.com/notes/api    verify=true
+    ${responseLU}    POST On Session    alias=expandtesting     url=/users/login    data=${data}   expected_status=200  
+    ${json_responseLU}    Convert String To Json    ${responseLU.content}  
+    ${user_email_ob}    Get Value From Json    ${json_responseLU}    data.email
+    ${user_email_str}    Convert JSON To String	 ${user_email_ob}
+    ${user_email_rsp}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_id_ob}    Get Value From Json    ${json_responseLU}    data.id
+    ${user_id_str}    Convert JSON To String	 ${user_id_ob}
+    ${user_id_rsp}    Remove String    ${user_id_str}    [    ]    '    " 
+    ${user_id}    Set Variable    ${user_id_rsp}    
+    ${user_name_ob}    Get Value From Json    ${json_responseLU}    data.name
+    ${user_name_str}    Convert JSON To String	 ${user_name_ob}
+    ${user_name_rsp}    Remove String    ${user_name_str}    [    ]    '    "  
+    ${user_password_ob}    Get Value From Json    ${json_responseLU}    data.password
+    ${user_password_str}    Convert JSON To String	 ${user_password_ob}
+    ${user_password_rsp}    Remove String    ${user_password_str}    [    ]    '    "      
+    ${user_token_ob}    Get Value From Json    ${json_responseLU}    data.token
+    ${user_token_str}    Convert JSON To String	 ${user_token_ob}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
+    Should Be Equal    ${user_email}    ${user_email_rsp}
+    Should Be Equal    ${user_name}    ${user_name_rsp}   
+    Should Be Equal    Login successful    ${responseLU.json()['message']}
+    Log To Console    ${responseLU.json()['message']}
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+
+logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${user_email_data}    Get Value From Json    ${data}    $.user_email
+    ${user_email_str}    Convert JSON To String	 ${user_email_data}
+    ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_name_data}    Get Value From Json    ${data}    $.user_name
+    ${user_name_str}    Convert JSON To String	 ${user_name_data}
+    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
+    ${user_password_data}    Get Value From Json    ${data}    $.user_password
+    ${user_password_str}    Convert JSON To String	 ${user_password_data}
+    ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
+    New Browser    headless=True    
+    #When headless, use the line above and not the 2 lines below
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
+    New Page    https://practice.expandtesting.com/notes/app/login
+    Fill Text    selector=//input[@id='email']    txt=${user_email}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Click    selector=//button[contains(.,'Login')]
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    Go To    https://practice.expandtesting.com/notes/app/profile
+    ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
+    ${user_token}    LocalStorage Get Item   key=token 
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}

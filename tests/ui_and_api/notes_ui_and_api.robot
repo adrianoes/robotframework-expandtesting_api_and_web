@@ -12,8 +12,8 @@ Library    Collections
 
 Create a new note via UI
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -27,6 +27,9 @@ Create a new note via UI
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
+    ${user_token_data}    Get Value From Json    ${data}    $.user_token
+    ${user_token_str}    Convert JSON To String	 ${user_token_data}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
@@ -74,15 +77,15 @@ Create a new note via UI
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
     # Log To Console    ${note_id_color}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    deleteUserViaUi(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
 Get all notes via UI
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     #token us read for when we want to use api custom commands to help ui tests.
@@ -154,14 +157,14 @@ Get all notes via UI
             Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked
         END 
     END
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
 Update an existing note via UI
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     createNoteViaUi(${bypassParalelismNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
@@ -195,14 +198,14 @@ Update an existing note via UI
     ELSE
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the completed status of a note via UI
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     createNoteViaUi(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
@@ -233,14 +236,14 @@ Update the completed status of a note via UI
         Log To Console    Uncheckeddddddddd
         Should Be Equal    ${note_id_color_final}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete a note via UI
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber}) 
     createNoteViaUi(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
@@ -251,6 +254,6 @@ Delete a note via UI
     Click    selector=//button[@data-testid='note-delete-confirm']
     #did not work when selector is coded instead of xpath
     Get Element Count    xpath=(//div[contains(.,'${note_title}')])[12]  ==  0           
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})

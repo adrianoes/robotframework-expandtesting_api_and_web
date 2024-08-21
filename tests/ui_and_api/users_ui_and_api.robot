@@ -9,7 +9,7 @@ Library    FakerLibrary
 
 *** Test Cases ***
 
-Creates a new user account via UI
+Creates a new user account via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
@@ -28,14 +28,14 @@ Creates a new user account via UI
     Click    selector=//button[contains(.,'Register')]
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_name":"${user_name}","user_password":"${user_password}"}
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    logInUserViaApi_without_user_id(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Log in as an existing user via UI
+Log in as an existing user via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
+    createUserViaApi(${bypassParalelismNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -46,7 +46,11 @@ Log in as an existing user via UI
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    Go To    https://practice.expandtesting.com/notes/app/login
+    New Browser    headless=True    
+    #When headless, use the line above and not the 2 lines below
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
+    New Page    https://practice.expandtesting.com/notes/app/login
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
@@ -55,14 +59,14 @@ Log in as an existing user via UI
     ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Retrieve user profile information via UI
+Retrieve user profile information via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})    
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -71,19 +75,18 @@ Retrieve user profile information via UI
     ${user_name_str}    Convert JSON To String	 ${user_name_data}
     ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
     Go To    https://practice.expandtesting.com/notes/app/profile
-    Click    selector=//div[@class='page-layout']
     ${user_email_profile}    Get Attribute    selector=//input[@data-testid='user-email']    attribute=value
     ${user_name_profile}    Get Attribute    selector=//input[@data-testid='user-name']    attribute=value
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${user_name}    ${user_name_profile}
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Update user profile information via UI
+Update user profile information via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -91,7 +94,7 @@ Update user profile information via UI
     ${updated_user_company}    FakerLibrary.Company
     ${updated_user_name}    FakerLibrary.Name
     ${updated_user_phone_int}    FakerLibrary.Random Int    min=10000000    max=99999999999999999999    step=1  
-    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}
+    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}    
     Fill Text    selector=//input[@data-testid='user-company']    txt=${updated_user_company}
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
@@ -105,14 +108,14 @@ Update user profile information via UI
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${updated_user_name}    ${user_name_profile}
     Should Be Equal    ${updated_user_phone}    ${user_phone_profile}
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Change a user\'s password via UI 
+Change a user\'s password via UI and API 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
@@ -125,26 +128,26 @@ Change a user\'s password via UI
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_new_password}
     Click    selector=//button[contains(.,'Update password')]
     Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'The password was successfully updated')]    state=visible
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Log out a user via UI 
+Log out a user via UI and API 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Logout')]
     Wait For Elements State    selector=//a[contains(.,'Login')]    state=visible
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    logInUserViaApi(${bypassParalelismNumber})
+    deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
-Delete user account via UI
+Delete user account via UI and API
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
