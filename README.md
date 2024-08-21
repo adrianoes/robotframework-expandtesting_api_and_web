@@ -15,10 +15,6 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | JSONLibrary                     | 0.5            | -                                                               | 
 | robotframework-faker            | 5.0.0          | -                                                               | 
 | Robot Framework Language Server | 1.12.0         | -                                                               |
-| Chrome                          | 127.0.6533.100 | -                                                               |
-| Firefox                         | 129.0          | -                                                               |
-| Chrome webdriver                | 127.0.6533.99  | -                                                               |
-| Firefox geckodriver             | 0.35.0         | -                                                               |
 | Chrome TruePath                 | 1.0.0          | Optional. Recommended so you can work with accurate locators.   |              
 
 # Installation:

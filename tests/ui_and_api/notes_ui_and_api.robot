@@ -1,7 +1,7 @@
 *** Settings ***
 
 Resource    ../resources/test.resource
-Library    Browser 
+Library    Browser     
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
