@@ -19,7 +19,9 @@ Creates a new user account via UI and API
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
@@ -61,7 +63,9 @@ Log in as an existing user via UI and API
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/login
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
@@ -96,7 +100,9 @@ Log in as an existing user via UI and API - Wrong password
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/login
+    Set Browser Timeout    ${old_timeout}
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt='e'+${user_password}
     Click    selector=//button[contains(.,'Login')]
@@ -127,7 +133,9 @@ Log in as an existing user via UI and API - Invalid e-mail
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/login
+    Set Browser Timeout    ${old_timeout}
     Fill Text    selector=//input[@id='email']    txt='@'+${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]

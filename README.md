@@ -10,6 +10,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | Python                          | 3.12.5         | -                                                               |
 | Visual Studio Code              | 1.89.1         | -                                                               |
 | Robot Framework                 | 7.0.1          | -                                                               | 
+| Pabot                           | 2.18.0         | -                                                               |
 | Browser Library                 | 18.8.0         | -                                                               | 
 | RequestsLibrary                 | 0.9.7          | -                                                               | 
 | JSONLibrary                     | 0.5            | -                                                               | 
@@ -29,6 +30,7 @@ and keep all the other preferenced options as they are.
   - :white_check_mark: Add "Open with code" action to Windows Explorer directory context menu.
 Check then both to add both options in context menu.
 - Open windows propmpt as admin and execute ```pip install robotframework``` to install Robot Framework.
+- Open windows propmpt as admin and execute ```pip install robotframework-pabot``` to install Pabot plugin.
 - Open windows propmpt as admin and execute ```pip install robotframework-browser``` to install Browser library.
 - Open windows propmpt as admin and execute ```pip install robotframework-requests``` to install RequestsLibrary.
 - Open windows propmpt as admin and execute ```pip install robotframework-jsonlibrary``` to install JSONLibrary.
@@ -47,6 +49,8 @@ Check then both to add both options in context menu.
 - Execute ```robot -d results -e UI -e NEGATIVE .\tests\api\notes_ui.robot``` to run all the tests but the ones tagged with UI, NEGATIVE or both tags inside notes_ui.robot suite and store results in separated folder.
 - Execute ```robot -d results -i API -i FULL .\tests\api\users_api.robot``` to run all the tests tagged with API, FULL or both tags inside users_api.robot suite and store results in separated folder.
 - Execute ```robot -d results -i UI_AND_API .\tests\api\users_ui_and_api.robot``` to run all the tests tagged with UI_AND_API inside users_ui_and_api.robot suite and store results in separated folder.
+- Execute ```pabot --testlevelsplit tests``` to run all tests in parallel and headless mode.
+- Execute ```pabot --processes 8 tests``` to run all tests in parallel according to each execution splited in 8 CPU cores which will execute 8 processes at time and headless mode.
 
 # Support:
 
@@ -73,8 +77,11 @@ Check then both to add both options in context menu.
 - [Wait for Response - how to get status_code](https://forum.robotframework.org/t/wait-for-response-how-to-get-status-code/4540)
 - [Fetch From Left](https://robotframework.org/robotframework/latest/libraries/String.html#Fetch%20From%20Left)
 - [How to use Tags and Document your test #6](https://www.youtube.com/watch?v=bBnPFNOTkdQ)
+- [Browser - Timeout 10000ms on page.goto (New Page)](https://forum.robotframework.org/t/browser-timeout-10000ms-on-page-goto-new-page/825/3)
+- [Running tests in parallel](https://docs.robotframework.org/docs/parallel)
 
 # Tips:
 
 - UI and API tests to send password reset link to user's email and API tests to verify a password reset token and reset a user's password must be tested manually as they rely on e-mail verification.
 - Always check drivers and browsers versios before running the tests. They should be compatible.
+- Pabot documentation has some interesting tricks. Have a look!

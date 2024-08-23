@@ -67,6 +67,8 @@ deleteJsonFile(${bypassParalelismNumber})
     Log To Console    Json file deleted
 
 createUserViaApi(${bypassParalelismNumber})
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
+    Set Browser Timeout    ${old_timeout}
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
@@ -176,7 +178,7 @@ deleteUserViaUi(${bypassParalelismNumber})
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible
 
  
-createUserViaUi(${bypassParalelismNumber})   
+createUserViaUi(${bypassParalelismNumber}) 
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
@@ -184,7 +186,9 @@ createUserViaUi(${bypassParalelismNumber})
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
@@ -282,7 +286,9 @@ logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/login
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]

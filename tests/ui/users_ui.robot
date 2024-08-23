@@ -19,7 +19,9 @@ Creates a new user account via UI
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
@@ -50,7 +52,9 @@ Creates a new user account via UI - Invalid e-mail
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt='@'+${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
@@ -68,7 +72,9 @@ Creates a new user account via UI - Wrong password
     #When headless, use the line above and not the 2 lines below
     # New Browser    headless=False    args=["--start-maximized"]
     # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@name='name']    txt=${user_name}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
