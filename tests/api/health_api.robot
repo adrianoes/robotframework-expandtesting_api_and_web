@@ -4,7 +4,8 @@ Library    RequestsLibrary
 
 *** Test Cases ***
 
-Check api health 
+Check api health
+    [Tags]  API    BASIC    FULL 
     Create Session    alias=expandtesting    url=https://practice.expandtesting.com/notes/api
     ${responseCH}    GET On Session    alias=expandtesting     url=/health-check   expected_status=200 
     ${message}    Set Variable    ${responseCH.json()['message']}    

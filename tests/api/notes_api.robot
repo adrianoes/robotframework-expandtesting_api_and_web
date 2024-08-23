@@ -11,6 +11,7 @@ Library    Collections
 *** Test Cases ***
 
 Creates a new note via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -57,6 +58,7 @@ Creates a new note via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Creates a new note via API - Bad request
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -82,6 +84,7 @@ Creates a new note via API - Bad request
     deleteJsonFile(${bypassParalelismNumber})
 
 Creates a new note via API - Unauthorized
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -107,6 +110,7 @@ Creates a new note via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Get all notes via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -212,6 +216,7 @@ Get all notes via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Get all notes via API - Unauthorized
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -282,6 +287,7 @@ Get all notes via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Get note by ID via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -315,6 +321,7 @@ Get note by ID via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Get note by ID via API - Unauthorized
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -348,6 +355,7 @@ Get note by ID via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Update an existing note via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -411,6 +419,7 @@ Update an existing note via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Update an existing note via API - Bad request
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -449,6 +458,7 @@ Update an existing note via API - Bad request
     deleteJsonFile(${bypassParalelismNumber})
 
 Update an existing note via API - Unauthorized
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -487,6 +497,7 @@ Update an existing note via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the completed status of a note via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -548,6 +559,7 @@ Update the completed status of a note via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the completed status of a note via API - Bad request
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -584,6 +596,7 @@ Update the completed status of a note via API - Bad request
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the completed status of a note via API - Unauthorized
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -620,6 +633,7 @@ Update the completed status of a note via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete a note by ID via API
+    [Tags]  API    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -640,6 +654,7 @@ Delete a note by ID via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete a note by ID via API - Bad request
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -660,6 +675,7 @@ Delete a note by ID via API - Bad request
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete a note by ID via API - Unauthorizedt
+    [Tags]  API    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})

@@ -10,6 +10,7 @@ Library    FakerLibrary
 *** Test Cases ***
 
 Creates a new user account via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
@@ -38,6 +39,7 @@ Creates a new user account via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Creates a new user account via API - Bad request
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     ${user_email}    FakerLibrary.Email
     ${user_name}    FakerLibrary.Name
@@ -49,6 +51,7 @@ Creates a new user account via API - Bad request
     Should Be Equal    A valid email address is required    ${responseCU.json()['message']}
 
 Log in as an existing user via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
@@ -94,6 +97,7 @@ Log in as an existing user via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Log in as an existing user via API - Bad request
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
@@ -121,6 +125,7 @@ Log in as an existing user via API - Bad request
     deleteJsonFile(${bypassParalelismNumber})
 
 Log in as an existing user via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
@@ -147,7 +152,8 @@ Log in as an existing user via API - Unauthorized
     deleteUserViaApi(${bypassParalelismNumber})
     deleteJsonFile(${bypassParalelismNumber})
 
-Retrieve user profile information via API 
+Retrieve user profile information via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -195,6 +201,7 @@ Retrieve user profile information via API
 
 
 Retrieve user profile information via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     # Retrieve user profile information via API - Bad Request is not applicable here since I was not able to make a bad request by changing the content type. Apparently robot has other means to deal with it and does not considers this header. Same for others like this one.
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
@@ -225,6 +232,7 @@ Retrieve user profile information via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the user profile information via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -280,6 +288,7 @@ Update the user profile information via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the user profile information via API - Bad Request
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -315,6 +324,7 @@ Update the user profile information via API - Bad Request
     deleteJsonFile(${bypassParalelismNumber})
 
 Update the user profile information via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -350,6 +360,7 @@ Update the user profile information via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Change a user\'s password via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -372,6 +383,7 @@ Change a user\'s password via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Change a user\'s password via API - Bad Request
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -394,6 +406,7 @@ Change a user\'s password via API - Bad Request
     deleteJsonFile(${bypassParalelismNumber})
 
 Change a user\'s password via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -416,6 +429,7 @@ Change a user\'s password via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Log out a user via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -434,6 +448,7 @@ Log out a user via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Log out a user via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -452,6 +467,7 @@ Log out a user via API - Unauthorized
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete user account via API
+    [Tags]  API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})
@@ -468,6 +484,7 @@ Delete user account via API
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete user account via API - Unauthorized
+    [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber})
     logInUserViaApi(${bypassParalelismNumber})

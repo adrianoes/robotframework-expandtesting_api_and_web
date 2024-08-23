@@ -40,9 +40,13 @@ Check then both to add both options in context menu.
 # Tests:
 
 - Execute ```robot -d ./results tests``` to run all tests in headless mode and store results in separated folder.
-- Execute ```robot -d ./results .\tests\ui\users_ui.robot``` to run all the tests in the users_ui suite in headless mode and store results in separated folder.
-- Execute ```robot -d ./results -t "Change a user\'s password via UI" tests/ui/users_ui.robot``` to run Change a user's password via UI test case inside users_ui suite and store results in separated folder.
+- Execute ```robot -d ./results .\tests\ui\users_ui.robot``` to run all the tests in the users_ui.robot suite in headless mode and store results in separated folder.
+- Execute ```robot -d ./results -t "Change a user\'s password via UI" tests/ui/users_ui.robot``` to run Change a user's password via UI test case inside users_ui.robot suite and store results in separated folder.
 - Hit :point_right:**Testing** button on left side bar in VSC and choose the tests you want to execute.
+- Execute ```robot -d results -i BASIC tests``` to run the tests tagged with API tag and store results in separated folder.
+- Execute ```robot -d results -e UI -e NEGATIVE .\tests\api\notes_ui.robot``` to run all the tests but the ones tagged with UI, NEGATIVE or both tags inside notes_ui.robot suite and store results in separated folder.
+- Execute ```robot -d results -i API -i FULL .\tests\api\users_api.robot``` to run all the tests tagged with API, FULL or both tags inside users_api.robot suite and store results in separated folder.
+- Execute ```robot -d results -i UI_AND_API .\tests\api\users_ui_and_api.robot``` to run all the tests tagged with UI_AND_API inside users_ui_and_api.robot suite and store results in separated folder.
 
 # Support:
 
@@ -68,6 +72,7 @@ Check then both to add both options in context menu.
 - [Examples Of Handling Checkbox Validations using the Browser Library in Robot Framework](https://www.linkedin.com/pulse/examples-handling-checkbox-validations-using-browser-library-kumar-g-jixec/)
 - [Wait for Response - how to get status_code](https://forum.robotframework.org/t/wait-for-response-how-to-get-status-code/4540)
 - [Fetch From Left](https://robotframework.org/robotframework/latest/libraries/String.html#Fetch%20From%20Left)
+- [How to use Tags and Document your test #6](https://www.youtube.com/watch?v=bBnPFNOTkdQ)
 
 # Tips:
 

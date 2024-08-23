@@ -11,6 +11,7 @@ Library    Collections
 *** Test Cases ***
 
 Create a new note via UI and API
+    [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -82,7 +83,90 @@ Create a new note via UI and API
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
+Create a new note via UI and API - Invalid title
+    [Tags]    UI_AND_API    FULL    NEGATIVE
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${user_email_data}    Get Value From Json    ${data}    $.user_email
+    ${user_email_str}    Convert JSON To String	 ${user_email_data}
+    ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_id_data}    Get Value From Json    ${data}    $.user_id
+    ${user_id_str}    Convert JSON To String	 ${user_id_data}
+    ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
+    ${user_name_data}    Get Value From Json    ${data}    $.user_name
+    ${user_name_str}    Convert JSON To String	 ${user_name_data}
+    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
+    ${user_password_data}    Get Value From Json    ${data}    $.user_password
+    ${user_password_str}    Convert JSON To String	 ${user_password_data}
+    ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
+    ${user_token_data}    Get Value From Json    ${data}    $.user_token
+    ${user_token_str}    Convert JSON To String	 ${user_token_data}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
+    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
+    #Number of clicks in the Completed checkbox
+    ${note_completed}    FakerLibrary.Random Int    1    2    1
+    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_title}    FakerLibrary.Sentence    nb_words=3
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//div[@class='page-layout']
+    Click    selector=//button[contains(.,'+ Add Note')]
+    Select Options By    data-testid=note-category    value    ${note_category}    
+    IF    ${note_completed} == 1
+        Check Checkbox    selector=//input[@data-testid='note-completed']
+    END  
+    Fill Text    selector=//input[@data-testid='note-title']    txt='e'
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
+    Click    selector=//button[contains(.,'Create')]
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible
+    deleteUserViaApi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
+Create a new note via UI and API - Invalid description
+    [Tags]    UI_AND_API    FULL    NEGATIVE
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${user_email_data}    Get Value From Json    ${data}    $.user_email
+    ${user_email_str}    Convert JSON To String	 ${user_email_data}
+    ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
+    ${user_id_data}    Get Value From Json    ${data}    $.user_id
+    ${user_id_str}    Convert JSON To String	 ${user_id_data}
+    ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
+    ${user_name_data}    Get Value From Json    ${data}    $.user_name
+    ${user_name_str}    Convert JSON To String	 ${user_name_data}
+    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
+    ${user_password_data}    Get Value From Json    ${data}    $.user_password
+    ${user_password_str}    Convert JSON To String	 ${user_password_data}
+    ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
+    ${user_token_data}    Get Value From Json    ${data}    $.user_token
+    ${user_token_str}    Convert JSON To String	 ${user_token_data}
+    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
+    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
+    #Number of clicks in the Completed checkbox
+    ${note_completed}    FakerLibrary.Random Int    1    2    1
+    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_title}    FakerLibrary.Sentence    nb_words=3
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//div[@class='page-layout']
+    Click    selector=//button[contains(.,'+ Add Note')]
+    Select Options By    data-testid=note-category    value    ${note_category}    
+    IF    ${note_completed} == 1
+        Check Checkbox    selector=//input[@data-testid='note-completed']
+    END  
+    Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
+    Click    selector=//button[contains(.,'Create')]
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible
+    deleteUserViaApi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
 Get all notes via UI and API
+    [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -162,6 +246,7 @@ Get all notes via UI and API
     deleteJsonFile(${bypassParalelismNumber})
 
 Update an existing note via UI and API
+    [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -202,7 +287,56 @@ Update an existing note via UI and API
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
 
+Update an existing note via UI and API - Invalid title
+    [Tags]    UI_AND_API    FULL    NEGATIVE
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
+    createNoteViaUi(${bypassParalelismNumber})
+    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
+    ${note_completed}    FakerLibrary.Random Int    1    2    1
+    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_title}    FakerLibrary.Sentence    nb_words=3
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//button[@data-testid='note-edit']
+    Select Options By    data-testid=note-category    value    ${note_category}
+    IF    ${note_completed} == 1
+        Check Checkbox    selector=//input[@data-testid='note-completed']
+    END 
+    Fill Text    selector=//input[@data-testid='note-title']    txt='e'
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
+    Click    selector=//button[@data-testid='note-submit']
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible
+    deleteUserViaApi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
+Update an existing note via UI and API - Invalid description
+    [Tags]    UI_AND_API    FULL    NEGATIVE
+    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${bypassParalelismNumber}) 
+    logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
+    createNoteViaUi(${bypassParalelismNumber})
+    ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
+    ${note_completed}    FakerLibrary.Random Int    1    2    1
+    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_title}    FakerLibrary.Sentence    nb_words=3
+    Go To    https://practice.expandtesting.com/notes/app
+    Click    selector=//button[@data-testid='note-edit']
+    Select Options By    data-testid=note-category    value    ${note_category}
+    IF    ${note_completed} == 1
+        Check Checkbox    selector=//input[@data-testid='note-completed']
+    END 
+    Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
+    Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
+    Click    selector=//button[@data-testid='note-submit']
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible
+    deleteUserViaApi(${bypassParalelismNumber})
+    Close Browser
+    deleteJsonFile(${bypassParalelismNumber})
+
 Update the completed status of a note via UI and API
+    [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
@@ -241,6 +375,7 @@ Update the completed status of a note via UI and API
     deleteJsonFile(${bypassParalelismNumber})
 
 Delete a note via UI and API
+    [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${bypassParalelismNumber}) 
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber}) 
