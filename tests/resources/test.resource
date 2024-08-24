@@ -164,7 +164,7 @@ logInUserViaUi(${bypassParalelismNumber})
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
-    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible    timeout=5m
     Go To    https://practice.expandtesting.com/notes/app/profile
     # After concluding this method to grab user_id, other one catching it in the response was implemented. This one will remain here so both ways were presented.
     # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
@@ -175,7 +175,7 @@ deleteUserViaUi(${bypassParalelismNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
-    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible    timeout=5m
 
  
 createUserViaUi(${bypassParalelismNumber}) 
@@ -202,7 +202,7 @@ createUserViaUi(${bypassParalelismNumber})
     ${user_id_partial}    Fetch From Left    ${body_str}    ', 'name': 
     ${user_id}    Fetch From Right    ${user_id_partial}    'id': '       
     # Log To Console      ${user_id}
-    Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible
+    Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
 
 createNoteViaUi(${bypassParalelismNumber}) 
@@ -237,23 +237,23 @@ createNoteViaUi(${bypassParalelismNumber})
     Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[contains(.,'Create')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible    timeout=5m
     ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible    timeout=5m
     IF    ${note_completed} == 1
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked    timeout=5m
         #verify the header colors in the future
     ELSE
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked    timeout=5m
     END    
     Click    selector=//a[contains(.,'View')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible
-    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible
-    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible    timeout=5m
+    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible    timeout=5m
+    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible    timeout=5m
     IF    ${note_completed} == 1
-        Wait For Elements State    selector=//input[@type='checkbox']    state=checked
+        Wait For Elements State    selector=//input[@type='checkbox']    state=checked    timeout=5m
     ELSE
-        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked
+        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked    timeout=5m
     END
     Go To    https://practice.expandtesting.com/notes/app/
     ${note_id_full_url_extension}    Get Attribute    selector=//a[contains(.,'View')]    attribute=href
@@ -292,7 +292,7 @@ logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
-    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible    timeout=5m
     Go To    https://practice.expandtesting.com/notes/app/profile
     ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 

@@ -35,7 +35,7 @@ Creates a new user account via UI and API
     ${user_id_partial}    Fetch From Left    ${body_str}    ', 'name': 
     ${user_id}    Fetch From Right    ${user_id_partial}    'id': '       
     # Log To Console      ${user_id}
-    Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible
+    Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
     Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
     logInUserViaApi(${bypassParalelismNumber})
     deleteUserViaApi(${bypassParalelismNumber})
@@ -69,7 +69,7 @@ Log in as an existing user via UI and API
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
-    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible
+    Wait For Elements State    selector=//a[contains(.,'MyNotes')]    state=visible    timeout=5m
     Go To    https://practice.expandtesting.com/notes/app/profile
     # After concluding this method to grab user_id, other one catching it in the response was implemented. This one will remain here so both ways were presented.
     # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
@@ -106,7 +106,7 @@ Log in as an existing user via UI and API - Wrong password
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt='e'+${user_password}
     Click    selector=//button[contains(.,'Login')]
-    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Incorrect email address or password')]    state=visible
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Incorrect email address or password')]    state=visible    timeout=5m
     logInUserViaApi(${bypassParalelismNumber})
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
@@ -139,7 +139,7 @@ Log in as an existing user via UI and API - Invalid e-mail
     Fill Text    selector=//input[@id='email']    txt='@'+${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
-    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'A valid email address is required')]    state=visible
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'A valid email address is required')]    state=visible    timeout=5m
     logInUserViaApi(${bypassParalelismNumber})
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
@@ -183,7 +183,7 @@ Update user profile information via UI and API
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
-    Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'Profile updated successful')]    state=visible
+    Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'Profile updated successful')]    state=visible    timeout=5m
     ${user_company_profile}    Get Attribute    selector=//input[@data-testid='user-company']    attribute=value
     ${user_email_profile}    Get Attribute    selector=//input[@data-testid='user-email']    attribute=value
     ${user_name_profile}    Get Attribute    selector=//input[@data-testid='user-name']    attribute=value
@@ -213,7 +213,7 @@ Update user profile information via UI and API - Invalid company name
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'company name should be between 4 and 30 characters')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'company name should be between 4 and 30 characters')]    state=visible    timeout=5m
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -235,7 +235,7 @@ Update user profile information via UI and API - Invalid phone number
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Phone number should be between 8 and 20 digits')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Phone number should be between 8 and 20 digits')]    state=visible    timeout=5m
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -256,7 +256,7 @@ Change a user\'s password via UI and API
     Fill Text    selector=//input[contains(@data-testid,'new-password')]    txt=${user_new_password}
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_new_password}
     Click    selector=//button[contains(.,'Update password')]
-    Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'The password was successfully updated')]    state=visible
+    Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'The password was successfully updated')]    state=visible    timeout=5m
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -277,7 +277,7 @@ Change a user\'s password via UI and API - Type same password
     Fill Text    selector=//input[contains(@data-testid,'new-password')]    txt=${user_new_password}
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_password}
     Click    selector=//button[contains(.,'Update password')]
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Passwords don')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Passwords don')]    state=visible    timeout=5m
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -289,7 +289,7 @@ Log out a user via UI and API
     logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Logout')]
-    Wait For Elements State    selector=//a[contains(.,'Login')]    state=visible
+    Wait For Elements State    selector=//a[contains(.,'Login')]    state=visible    timeout=5m
     logInUserViaApi(${bypassParalelismNumber})
     deleteUserViaApi(${bypassParalelismNumber})
     Close Browser
@@ -303,6 +303,6 @@ Delete user account via UI and API
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
-    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible    timeout=5m
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})

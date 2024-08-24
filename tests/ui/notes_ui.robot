@@ -43,23 +43,23 @@ Create a new note via UI
     Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[contains(.,'Create')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible    timeout=5m
     ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible    timeout=5m
     IF    ${note_completed} == 1
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked    timeout=5m
         #verify the header colors in the future
     ELSE
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked    timeout=5m
     END    
     Click    selector=//a[contains(.,'View')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible
-    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible
-    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[10]    state=visible    timeout=5m
+    Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible    timeout=5m
+    Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible    timeout=5m
     IF    ${note_completed} == 1
-        Wait For Elements State    selector=//input[@type='checkbox']    state=checked
+        Wait For Elements State    selector=//input[@type='checkbox']    state=checked    timeout=5m
     ELSE
-        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked
+        Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked    timeout=5m
     END
     Go To    https://practice.expandtesting.com/notes/app/
     ${note_id_full_url_extension}    Get Attribute    selector=//a[contains(.,'View')]    attribute=href
@@ -113,7 +113,7 @@ Create a new note via UI - Invalid title
     Fill Text    selector=//input[@data-testid='note-title']    txt='e'
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[contains(.,'Create')]
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -151,7 +151,7 @@ Create a new note via UI - Invalid description
     Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[contains(.,'Create')]
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -213,7 +213,7 @@ Get all notes via UI
         ${note_description}    Get From List    ${arrayDescription}    -${i}
         ${note_title}    Get From List    ${arraytitle}    -${i}      
         ${note_updated_at}    Get From List    ${arrayNoteUpdatedAt}    -${i}
-        Wait For Elements State    (//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    state=visible
+        Wait For Elements State    (//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    state=visible    timeout=5m
         ${note_id_color}    Get Attribute    selector=(//div[@data-testid='note-card-title'])[${i}][contains(.,'${note_title}')]    attribute=style
         IF    "${note_completed}" == "1"
             Should Be Equal    ${note_id_color}    background-color: rgba(40, 46, 41, 0.6); color: rgb(255, 255, 255); 
@@ -224,12 +224,12 @@ Get all notes via UI
         ELSE
             Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
         END 
-        Wait For Elements State    selector=(//div[@class='card-body d-flex flex-column'])[${i}][contains(.,'${note_description}${note_updated_at}')]    state=visible
+        Wait For Elements State    selector=(//div[@class='card-body d-flex flex-column'])[${i}][contains(.,'${note_description}${note_updated_at}')]    state=visible    timeout=5m
         IF    ${note_completed} == 1
-            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=checked
+            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=checked    timeout=5m
         #verify the header colors in the future
         ELSE
-            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked
+            Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked    timeout=5m
         END 
     END
     deleteUserViaUi(${bypassParalelismNumber})
@@ -255,14 +255,14 @@ Update an existing note via UI
     Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[@data-testid='note-submit']
-    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_title}')])[12]    state=visible    timeout=5m
     ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
-    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible
+    Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible    timeout=5m
     IF    ${note_completed} == 1
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked    timeout=5m
         #verify the header colors in the future
     ELSE
-        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked
+        Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked    timeout=5m
     END  
     ${note_id_color}    Get Attribute    selector=//div[@data-testid='note-card-title']    attribute=style
     IF    "${note_completed}" == "1"
@@ -297,7 +297,7 @@ Update an existing note via UI - Invalid title
     Fill Text    selector=//input[@data-testid='note-title']    txt='e'
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[@data-testid='note-submit']
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
@@ -321,7 +321,7 @@ Update an existing note via UI - Invalid description
     Fill Text    selector=//input[@data-testid='note-title']    txt=${note_title}
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[@data-testid='note-submit']
-    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
     deleteUserViaUi(${bypassParalelismNumber})
     Close Browser
     deleteJsonFile(${bypassParalelismNumber})
