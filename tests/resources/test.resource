@@ -241,9 +241,11 @@ createNoteViaUi(${bypassParalelismNumber})
     ${note_updated_at}    Get Text    selector=//p[contains(@data-testid,'note-card-updated-at')]
     Wait For Elements State    selector=(//div[contains(.,'${note_description}${note_updated_at}')])[12]    state=visible    timeout=5m
     IF    ${note_completed} == 1
+        Scroll To Element    selector=//input[@data-testid='toggle-note-switch']
         Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=checked    timeout=5m
         #verify the header colors in the future
     ELSE
+        Scroll To Element    selector=//input[@data-testid='toggle-note-switch']
         Wait For Elements State    selector=//input[@data-testid='toggle-note-switch']    state=unchecked    timeout=5m
     END    
     Click    selector=//a[contains(.,'View')]
@@ -251,8 +253,10 @@ createNoteViaUi(${bypassParalelismNumber})
     Wait For Elements State    selector=//p[contains(.,'${note_description}')]    state=visible    timeout=5m
     Wait For Elements State    selector=//p[contains(.,'${note_updated_at}')]    state=visible    timeout=5m
     IF    ${note_completed} == 1
+        Scroll To Element    selector=//input[@type='checkbox'] 
         Wait For Elements State    selector=//input[@type='checkbox']    state=checked    timeout=5m
     ELSE
+        Scroll To Element    selector=//input[@type='checkbox'] 
         Wait For Elements State    selector=//input[@type='checkbox']    state=unchecked    timeout=5m
     END
     Go To    https://practice.expandtesting.com/notes/app/
