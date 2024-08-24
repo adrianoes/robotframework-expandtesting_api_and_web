@@ -43,6 +43,7 @@ Creates a new user account via API
 Creates a new user account via API - Bad request
     [Tags]    API    FULL    NEGATIVE
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name

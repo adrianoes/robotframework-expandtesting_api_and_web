@@ -69,6 +69,7 @@ deleteJsonFile(${bypassParalelismNumber})
 createUserViaApi(${bypassParalelismNumber})
     ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     Set Browser Timeout    ${old_timeout}
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
@@ -180,6 +181,7 @@ deleteUserViaUi(${bypassParalelismNumber})
 
  
 createUserViaUi(${bypassParalelismNumber}) 
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name

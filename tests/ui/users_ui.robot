@@ -12,6 +12,7 @@ Library    FakerLibrary
 Creates a new user account via UI
     [Tags]    UI    BASIC    FULL 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
@@ -46,6 +47,7 @@ Creates a new user account via UI
 Creates a new user account via UI - Invalid e-mail
     [Tags]    UI    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
@@ -67,6 +69,7 @@ Creates a new user account via UI - Invalid e-mail
 Creates a new user account via UI - Wrong password
     [Tags]    UI    FULL    NEGATIVE 
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
