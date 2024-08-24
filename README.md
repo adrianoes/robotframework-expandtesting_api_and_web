@@ -77,7 +77,6 @@ Check then both to add both options in context menu.
 - [Wait for Response - how to get status_code](https://forum.robotframework.org/t/wait-for-response-how-to-get-status-code/4540)
 - [Fetch From Left](https://robotframework.org/robotframework/latest/libraries/String.html#Fetch%20From%20Left)
 - [How to use Tags and Document your test #6](https://www.youtube.com/watch?v=bBnPFNOTkdQ)
-- [Browser - Timeout 10000ms on page.goto (New Page)](https://forum.robotframework.org/t/browser-timeout-10000ms-on-page-goto-new-page/825/3)
 - [Running tests in parallel](https://docs.robotframework.org/docs/parallel)
 
 # Tips:
