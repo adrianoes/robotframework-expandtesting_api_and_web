@@ -34,7 +34,7 @@ Create a new note via UI and API
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
     Click    selector=//div[@class='page-layout']
@@ -111,7 +111,7 @@ Create a new note via UI and API - Invalid title
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
     Click    selector=//div[@class='page-layout']
@@ -152,7 +152,7 @@ Create a new note via UI and API - Invalid description
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
     Click    selector=//div[@class='page-layout']
@@ -183,10 +183,10 @@ Get all notes via UI and API
     ${note_category_last_element}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${arrayCategory}    Create List    ${note_category_last_element}    Home   Work    Personal        
     ${arrayCompleted}    Create List    1    0    0    0
-    ${note_description_1}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_2}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_3}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_4}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_1}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_2}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_3}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_4}    FakerLibrary.Sentence  nb_words=4
     ${arrayDescription}    Create List    ${note_description_1}    ${note_description_2}    ${note_description_3}    ${note_description_4}
     ${note_title_1}    FakerLibrary.Sentence  nb_words=3
     ${note_title_2}    FakerLibrary.Sentence  nb_words=3

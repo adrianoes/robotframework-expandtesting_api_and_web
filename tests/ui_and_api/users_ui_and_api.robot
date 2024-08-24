@@ -12,7 +12,8 @@ Library    FakerLibrary
 Creates a new user account via UI and API
     [Tags]    UI_AND_API    BASIC    FULL
     ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    ${user_email}    FakerLibrary.Email
+    ${random_email}    FakerLibrary.Email
+    ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
     New Browser    headless=True    

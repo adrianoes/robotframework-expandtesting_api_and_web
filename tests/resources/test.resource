@@ -69,7 +69,8 @@ deleteJsonFile(${bypassParalelismNumber})
 createUserViaApi(${bypassParalelismNumber})
     ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     Set Browser Timeout    ${old_timeout}
-    ${user_email}    FakerLibrary.Email
+    ${random_email}    FakerLibrary.Email
+    ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
     ${data}    Create Dictionary    email=${user_email}    name=${user_name}    password=${user_password}
@@ -116,7 +117,7 @@ createNoteViaApi(${bypassParalelismNumber})
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${note_category}    FakerLibrary.Random Element    elements=('Home', 'Work', 'Personal')
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     ${data}    Create Dictionary    category=${note_category}    description=${note_description}    title=${note_title}
     ${headers}    Create Dictionary    content-type=application/x-www-form-urlencoded    X-Auth-Token=${user_token}
@@ -179,7 +180,8 @@ deleteUserViaUi(${bypassParalelismNumber})
 
  
 createUserViaUi(${bypassParalelismNumber}) 
-    ${user_email}    FakerLibrary.Email
+    ${random_email}    FakerLibrary.Email
+    ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
     ${user_name}    FakerLibrary.Name
     ${user_password}    FakerLibrary.password
     New Browser    headless=True    
@@ -225,7 +227,7 @@ createNoteViaUi(${bypassParalelismNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
     Click    selector=//div[@class='page-layout']

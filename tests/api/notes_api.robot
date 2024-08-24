@@ -23,7 +23,7 @@ Creates a new note via API
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${note_category}    FakerLibrary.Random Element    elements=('Home', 'Work', 'Personal')
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     ${data}    Create Dictionary    category=${note_category}    description=${note_description}    title=${note_title}
     ${headers}    Create Dictionary    content-type=application/x-www-form-urlencoded    X-Auth-Token=${user_token}
@@ -70,7 +70,7 @@ Creates a new note via API - Bad request
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${note_category}    FakerLibrary.Random Element    elements=('Home', 'Work', 'Personal')
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     ${data}    Create Dictionary    category='a'    description=${note_description}    title=${note_title}
     ${headers}    Create Dictionary    content-type=application/x-www-form-urlencoded    X-Auth-Token=${user_token}
@@ -96,7 +96,7 @@ Creates a new note via API - Unauthorized
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${note_category}    FakerLibrary.Random Element    elements=('Home', 'Work', 'Personal')
-    ${note_description}    FakerLibrary.Sentence    nb_words=5
+    ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     ${data}    Create Dictionary    category=${note_category}    description=${note_description}    title=${note_title}
     ${headers}    Create Dictionary    content-type=application/x-www-form-urlencoded    X-Auth-Token='@'${user_token}
@@ -123,10 +123,10 @@ Get all notes via API
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${arrayCategory}    Create List    Home    Home   Work    Personal
     ${arrayCompleted}    Create List    false    false    false    true
-    ${note_description_1}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_2}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_3}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_4}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_1}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_2}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_3}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_4}    FakerLibrary.Sentence  nb_words=4
     ${arrayDescription}    Create List    ${note_description_1}    ${note_description_2}    ${note_description_3}    ${note_description_4}
     ${note_title_1}    FakerLibrary.Sentence  nb_words=3
     ${note_title_2}    FakerLibrary.Sentence  nb_words=3
@@ -229,10 +229,10 @@ Get all notes via API - Unauthorized
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
     ${arrayCategory}    Create List    Home    Home   Work    Personal
     ${arrayCompleted}    Create List    false    false    false    true
-    ${note_description_1}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_2}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_3}    FakerLibrary.Sentence  nb_words=5
-    ${note_description_4}    FakerLibrary.Sentence  nb_words=5
+    ${note_description_1}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_2}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_3}    FakerLibrary.Sentence  nb_words=4
+    ${note_description_4}    FakerLibrary.Sentence  nb_words=4
     ${arrayDescription}    Create List    ${note_description_1}    ${note_description_2}    ${note_description_3}    ${note_description_4}
     ${note_title_1}    FakerLibrary.Sentence  nb_words=3
     ${note_title_2}    FakerLibrary.Sentence  nb_words=3
@@ -375,7 +375,7 @@ Update an existing note via API
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
     ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
-    ${updated_note_description}    FakerLibrary.Sentence    nb_words=5
+    ${updated_note_description}    FakerLibrary.Sentence    nb_words=4
     ${updated_note_title}    FakerLibrary.Sentence    nb_words=3
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
@@ -439,7 +439,7 @@ Update an existing note via API - Bad request
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
     ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
-    ${updated_note_description}    FakerLibrary.Sentence    nb_words=5
+    ${updated_note_description}    FakerLibrary.Sentence    nb_words=4
     ${updated_note_title}    FakerLibrary.Sentence    nb_words=3
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
@@ -478,7 +478,7 @@ Update an existing note via API - Unauthorized
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
     ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
-    ${updated_note_description}    FakerLibrary.Sentence    nb_words=5
+    ${updated_note_description}    FakerLibrary.Sentence    nb_words=4
     ${updated_note_title}    FakerLibrary.Sentence    nb_words=3
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
