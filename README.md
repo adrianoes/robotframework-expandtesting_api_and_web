@@ -83,5 +83,4 @@ Check then both to add both options in context menu.
 
 - UI and API tests to send password reset link to user's email and API tests to verify a password reset token and reset a user's password must be tested manually as they rely on e-mail verification.
 - Pabot documentation has some interesting tricks. Have a look!
-- Configure a reasonable timeout and use Scroll To Element in the assertions that allows you to do so. 
-- Faker e-mail has presented some repeated e-mails. Adding random letters in the keyword is a good workaroud.     
+- Configure a reasonable timeout and use Scroll To Element in the assertions that allows you to do so.     
