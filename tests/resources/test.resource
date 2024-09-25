@@ -9,8 +9,8 @@ Library    FakerLibrary
 
 *** Keywords ***
 
-logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -48,10 +48,10 @@ logInUserViaApi(${bypassParalelismNumber})
     Should Be Equal    ${user_name}    ${user_name_rsp}   
     Should Be Equal    Login successful    ${responseLU.json()['message']}
     Log To Console    ${responseLU.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
-deleteUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+deleteUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
@@ -62,11 +62,11 @@ deleteUserViaApi(${bypassParalelismNumber})
     Should Be Equal    Account successfully deleted    ${responseDU.json()['message']}
     Log To Console    ${responseDU.json()['message']}
 
-deleteJsonFile(${bypassParalelismNumber})
-    Remove File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+deleteJsonFile(${randomNumber})
+    Remove File    tests/fixtures/testdata-${randomNumber}.json
     Log To Console    Json file deleted
 
-createUserViaApi(${bypassParalelismNumber})
+createUserViaApi(${randomNumber})
     ${old_timeout} =    Set Browser Timeout    1m 30 seconds
     Set Browser Timeout    ${old_timeout}
     ${random_letter}    FakerLibrary.Random Lowercase Letter
@@ -92,10 +92,10 @@ createUserViaApi(${bypassParalelismNumber})
     ${user_id_str}    Convert JSON To String	 ${user_id_ob}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    "  
     Log To Console    ${responseCU.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
     
-deleteNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+deleteNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_id_data}    Get Value From Json    ${data}    $.note_id
     ${note_id_str}    Convert JSON To String	 ${note_id_data}
     ${note_id}    Remove String    ${note_id_str}    [    ]    '    " 
@@ -109,8 +109,8 @@ deleteNoteViaApi(${bypassParalelismNumber})
     Should Be Equal    Note successfully deleted    ${responseDN.json()['message']}
     Log To Console    ${responseDN.json()['message']}
 
-createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -146,10 +146,10 @@ createNoteViaApi(${bypassParalelismNumber})
     Should Be Equal    ${user_id}    ${user_id_rsp} 
     Should Be Equal    Note successfully created    ${responseCN.json()['message']}
     Log To Console    ${responseCN.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_id":"${user_id}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_id":"${user_id}","user_token":"${user_token}"}
 
-logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -171,16 +171,16 @@ logInUserViaUi(${bypassParalelismNumber})
     # After concluding this method to grab user_id, other one catching it in the response was implemented. This one will remain here so both ways were presented.
     # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
-deleteUserViaUi(${bypassParalelismNumber})
+deleteUserViaUi(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible    timeout=5m
 
  
-createUserViaUi(${bypassParalelismNumber}) 
+createUserViaUi(${randomNumber}) 
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -207,10 +207,10 @@ createUserViaUi(${bypassParalelismNumber})
     ${user_id}    Fetch From Right    ${user_id_partial}    'id': '       
     # Log To Console      ${user_id}
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
 
-createNoteViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+createNoteViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -277,10 +277,10 @@ createNoteViaUi(${bypassParalelismNumber})
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
     # Log To Console    ${note_id_color}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
-logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -304,4 +304,4 @@ logInUserViaUi_when_user_was_created_via_api(${bypassParalelismNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}

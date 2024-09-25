@@ -11,7 +11,7 @@ Library    FakerLibrary
 
 Creates a new user account via UI
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -38,15 +38,15 @@ Creates a new user account via UI
     ${user_id}    Fetch From Right    ${user_id_partial}    'id': '       
     # Log To Console      ${user_id}
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    logInUserViaUi(${randomNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Creates a new user account via UI - Invalid e-mail
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -68,7 +68,7 @@ Creates a new user account via UI - Invalid e-mail
 
 Creates a new user account via UI - Wrong password
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -91,9 +91,9 @@ Creates a new user account via UI - Wrong password
 
 Log in as an existing user via UI
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -115,16 +115,16 @@ Log in as an existing user via UI
     # After concluding this method to grab user_id, other one catching it in the response was implemented. This one will remain here so both ways were presented.
     # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
-    deleteUserViaUi(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Log in as an existing user via UI - Wrong password
     [Tags]    UI    FULL    NEGATIVE  
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -136,16 +136,16 @@ Log in as an existing user via UI - Wrong password
     Fill Text    selector=//input[@id='password']    txt='e'+${user_password}
     Click    selector=//button[contains(.,'Login')]
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Incorrect email address or password')]    state=visible    timeout=5m
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    logInUserViaUi(${randomNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Log in as an existing user via UI - Invalid e-mail 
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -157,17 +157,17 @@ Log in as an existing user via UI - Invalid e-mail
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'A valid email address is required')]    state=visible    timeout=5m
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    logInUserViaUi(${randomNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Retrieve user profile information via UI
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -179,16 +179,16 @@ Retrieve user profile information via UI
     ${user_name_profile}    Get Attribute    selector=//input[@data-testid='user-name']    attribute=value
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${user_name}    ${user_name_profile}
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update user profile information via UI
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -209,16 +209,16 @@ Update user profile information via UI
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${updated_user_name}    ${user_name_profile}
     Should Be Equal    ${updated_user_phone}    ${user_phone_profile}
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update user profile information via UI - Invalid company name
     [Tags]    UI    FULL    NEGATIVE  
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -231,16 +231,16 @@ Update user profile information via UI - Invalid company name
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'company name should be between 4 and 30 characters')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update user profile information via UI - Invalid phone number 
     [Tags]    UI    FULL    NEGATIVE  
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -253,16 +253,16 @@ Update user profile information via UI - Invalid phone number
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Phone number should be between 8 and 20 digits')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Change a user\'s password via UI 
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
@@ -274,16 +274,16 @@ Change a user\'s password via UI
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_new_password}
     Click    selector=//button[contains(.,'Update password')]
     Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'The password was successfully updated')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Change a user\'s password via UI - Type same password
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
@@ -295,31 +295,31 @@ Change a user\'s password via UI - Type same password
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_password}
     Click    selector=//button[contains(.,'Update password')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Passwords don')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Log out a user via UI
     [Tags]    UI    BASIC    FULL  
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Logout')]
     Wait For Elements State    selector=//a[contains(.,'Login')]    state=visible    timeout=5m
-    logInUserViaUi(${bypassParalelismNumber})
-    deleteUserViaUi(${bypassParalelismNumber})
+    logInUserViaUi(${randomNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete user account via UI
     [Tags]    UI    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible    timeout=5m
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})

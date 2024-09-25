@@ -11,7 +11,7 @@ Library    FakerLibrary
 
 Creates a new user account via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -35,14 +35,14 @@ Creates a new user account via API
     ${user_id_str}    Convert JSON To String	 ${user_id_ob}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    "  
     Log To Console    ${responseCU.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    logInUserViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    logInUserViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Creates a new user account via API - Bad request
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
+    ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -56,9 +56,9 @@ Creates a new user account via API - Bad request
 
 Log in as an existing user via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -96,15 +96,15 @@ Log in as an existing user via API
     Should Be Equal    ${user_name}    ${user_name_rsp}   
     Should Be Equal    Login successful    ${responseLU.json()['message']}
     Log To Console    ${responseLU.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Log in as an existing user via API - Bad request
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -124,15 +124,15 @@ Log in as an existing user via API - Bad request
     ${json_responseLU}    Convert String To Json    ${responseLU.content}     
     Should Be Equal    A valid email address is required    ${responseLU.json()['message']}
     Log To Console    ${responseLU.json()['message']}
-    logInUserViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    logInUserViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Log in as an existing user via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -152,16 +152,16 @@ Log in as an existing user via API - Unauthorized
     ${json_responseLU}    Convert String To Json    ${responseLU.content}     
     Should Be Equal    Incorrect email address or password    ${responseLU.json()['message']}
     Log To Console    ${responseLU.json()['message']}
-    logInUserViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    logInUserViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Retrieve user profile information via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -198,8 +198,8 @@ Retrieve user profile information via API
     Should Be Equal    ${user_name}    ${user_name_rsp}   
     Should Be Equal    Profile successful    ${responseRU.json()['message']}
     Log To Console    ${responseRU.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 
 
@@ -207,10 +207,10 @@ Retrieve user profile information via API
 Retrieve user profile information via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
     # Retrieve user profile information via API - Bad Request is not applicable here since I was not able to make a bad request by changing the content type. Apparently robot has other means to deal with it and does not considers this header. Same for others like this one.
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -232,16 +232,16 @@ Retrieve user profile information via API - Unauthorized
     ${json_responseRU}    Convert String To Json    ${responseRU.content}  
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseRU.json()['message']}
     Log To Console    ${responseRU.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the user profile information via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
     #Create a keyword to read all this stuff
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -288,16 +288,16 @@ Update the user profile information via API
     Should Be Equal    ${updated_user_phone}    ${user_phone_rsp} 
     Should Be Equal    Profile updated successful    ${responseUU.json()['message']}
     Log To Console    ${responseUU.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the user profile information via API - Bad Request
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
     #Create a keyword to read all this stuff
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -324,16 +324,16 @@ Update the user profile information via API - Bad Request
     ${json_responseUU}    Convert String To Json    ${responseUU.content} 
     Should Be Equal    User name must be between 4 and 30 characters    ${responseUU.json()['message']}
     Log To Console    ${responseUU.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the user profile information via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
     #Create a keyword to read all this stuff
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -360,15 +360,15 @@ Update the user profile information via API - Unauthorized
     ${json_responseUU}    Convert String To Json    ${responseUU.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseUU.json()['message']}
     Log To Console    ${responseUU.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Change a user\'s password via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
@@ -383,15 +383,15 @@ Change a user\'s password via API
     ${json_responseCP}    Convert String To Json    ${responseCP.content}
     Should Be Equal    The password was successfully updated    ${responseCP.json()['message']}
     Log To Console    ${responseCP.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Change a user\'s password via API - Bad Request
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
@@ -406,15 +406,15 @@ Change a user\'s password via API - Bad Request
     ${json_responseCP}    Convert String To Json    ${responseCP.content}
     Should Be Equal    New password must be between 6 and 30 characters    ${responseCP.json()['message']}
     Log To Console    ${responseCP.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Change a user\'s password via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
@@ -429,15 +429,15 @@ Change a user\'s password via API - Unauthorized
     ${json_responseCP}    Convert String To Json    ${responseCP.content}
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseCP.json()['message']}
     Log To Console    ${responseCP.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Log out a user via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
@@ -447,16 +447,16 @@ Log out a user via API
     ${json_responseLOU}    Convert String To Json    ${responseLOU.content} 
     Should Be Equal    User has been successfully logged out    ${responseLOU.json()['message']}
     Log To Console    ${responseLOU.json()['message']}
-    logInUserViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    logInUserViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Log out a user via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
@@ -466,16 +466,16 @@ Log out a user via API - Unauthorized
     ${json_responseLOU}    Convert String To Json    ${responseLOU.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseLOU.json()['message']}
     Log To Console    ${responseLOU.json()['message']}
-    logInUserViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    logInUserViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete user account via API
     [Tags]  API    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
@@ -485,14 +485,14 @@ Delete user account via API
     ${json_responseDU}    Convert String To Json    ${responseDU.content} 
     Should Be Equal    Account successfully deleted    ${responseDU.json()['message']}
     Log To Console    ${responseDU.json()['message']}
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete user account via API - Unauthorized
     [Tags]    API    FULL    NEGATIVE
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
     ${user_token}    Remove String    ${user_token_str}    [    ]    '    "
@@ -502,4 +502,4 @@ Delete user account via API - Unauthorized
     ${json_responseDU}    Convert String To Json    ${responseDU.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseDU.json()['message']}
     Log To Console    ${responseDU.json()['message']}
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})

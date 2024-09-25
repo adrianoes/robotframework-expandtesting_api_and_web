@@ -12,10 +12,10 @@ Library    Collections
 
 Creates a new note via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -51,18 +51,18 @@ Creates a new note via API
     Should Be Equal    ${user_id}    ${user_id_rsp} 
     Should Be Equal    Note successfully created    ${responseCN.json()['message']}
     Log To Console    ${responseCN.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_id":"${user_id}","user_token":"${user_token}"}
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_id":"${user_id}","user_token":"${user_token}"}
     #This command will be kept for studying purpose only since there is already a deleteUserViaApi to delete user right away.
-    deleteNoteViaApi(${bypassParalelismNumber})
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteNoteViaApi(${randomNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Creates a new note via API - Bad request
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -79,16 +79,16 @@ Creates a new note via API - Bad request
     ${json_responseCN}    Convert String To Json    ${responseCN.content}
     Should Be Equal    Category must be one of the categories: Home, Work, Personal    ${responseCN.json()['message']}
     Log To Console    ${responseCN.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_id":"${user_id}","user_token":"${user_token}"}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_id":"${user_id}","user_token":"${user_token}"}
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Creates a new note via API - Unauthorized
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -105,16 +105,16 @@ Creates a new note via API - Unauthorized
     ${json_responseCN}    Convert String To Json    ${responseCN.content}
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseCN.json()['message']}
     Log To Console    ${responseCN.json()['message']}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"user_id":"${user_id}","user_token":"${user_token}"}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_id":"${user_id}","user_token":"${user_token}"}
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Get all notes via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -212,15 +212,15 @@ Get all notes via API
         Should Be Equal    Notes successfully retrieved    ${responseGNs.json()['message']}
         Log To Console    ${responseGNs.json()['message']}
     END    
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Get all notes via API - Unauthorized
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_id_data}    Get Value From Json    ${data}    $.user_id
     ${user_id_str}    Convert JSON To String	 ${user_id_data}
     ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
@@ -283,16 +283,16 @@ Get all notes via API - Unauthorized
     ${json_responseGNs}    Convert String To Json    ${responseGNs.content}
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseGNs.json()['message']}
     Log To Console    ${responseGNs.json()['message']}   
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Get note by ID via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -317,16 +317,16 @@ Get note by ID via API
     ${json_responseGN}    Convert String To Json    ${responseGN.content} 
     Should Be Equal    Note successfully retrieved    ${responseGN.json()['message']}
     Log To Console    ${responseGN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Get note by ID via API - Unauthorized
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -351,16 +351,16 @@ Get note by ID via API - Unauthorized
     ${json_responseGN}    Convert String To Json    ${responseGN.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseGN.json()['message']}
     Log To Console    ${responseGN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -415,16 +415,16 @@ Update an existing note via API
     Should Be Equal    ${user_id}    ${user_id_rsp} 
     Should Be Equal    Note successfully Updated    ${responseUN.json()['message']}
     Log To Console    ${responseUN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via API - Bad request
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -454,16 +454,16 @@ Update an existing note via API - Bad request
     ${json_responseUN}    Convert String To Json    ${responseUN.content}
     Should Be Equal    Category must be one of the categories: Home, Work, Personal    ${responseUN.json()['message']}
     Log To Console    ${responseUN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via API - Unauthorized
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -493,16 +493,16 @@ Update an existing note via API - Unauthorized
     ${json_responseUN}    Convert String To Json    ${responseUN.content}
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseUN.json()['message']}
     Log To Console    ${responseUN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the completed status of a note via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -555,16 +555,16 @@ Update the completed status of a note via API
     Should Be Equal    ${user_id}    ${user_id_rsp} 
     Should Be Equal    Note successfully Updated    ${responseUCSN.json()['message']}
     Log To Console    ${responseUCSN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the completed status of a note via API - Bad request
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -592,16 +592,16 @@ Update the completed status of a note via API - Bad request
     ${json_responseUCSN}    Convert String To Json    ${responseUCSN.content} 
     Should Be Equal    Note completed status must be boolean    ${responseUCSN.json()['message']}
     Log To Console    ${responseUCSN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the completed status of a note via API - Unauthorized
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json    
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json    
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    " 
@@ -629,16 +629,16 @@ Update the completed status of a note via API - Unauthorized
     ${json_responseUCSN}    Convert String To Json    ${responseUCSN.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseUCSN.json()['message']}
     Log To Console    ${responseUCSN.json()['message']}
-    deleteUserViaApi(${bypassParalelismNumber})
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteUserViaApi(${randomNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete a note by ID via API
     [Tags]  API    BASIC    FULL 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_id_data}    Get Value From Json    ${data}    $.note_id
     ${note_id_str}    Convert JSON To String	 ${note_id_data}
     ${note_id}    Remove String    ${note_id_str}    [    ]    '    " 
@@ -651,15 +651,15 @@ Delete a note by ID via API
     ${json_responseDN}    Convert String To Json    ${responseDN.content} 
     Should Be Equal    Note successfully deleted    ${responseDN.json()['message']}
     Log To Console    ${responseDN.json()['message']}
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete a note by ID via API - Bad request
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_id_data}    Get Value From Json    ${data}    $.note_id
     ${note_id_str}    Convert JSON To String	 ${note_id_data}
     ${note_id}    Remove String    ${note_id_str}    [    ]    '    " 
@@ -672,15 +672,15 @@ Delete a note by ID via API - Bad request
     ${json_responseDN}    Convert String To Json    ${responseDN.content} 
     Should Be Equal    Note ID must be a valid ID    ${responseDN.json()['message']}
     Log To Console    ${responseDN.json()['message']}
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete a note by ID via API - Unauthorizedt
     [Tags]  API    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${bypassParalelismNumber})
-    logInUserViaApi(${bypassParalelismNumber})
-    createNoteViaApi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaApi(${randomNumber})
+    logInUserViaApi(${randomNumber})
+    createNoteViaApi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_id_data}    Get Value From Json    ${data}    $.note_id
     ${note_id_str}    Convert JSON To String	 ${note_id_data}
     ${note_id}    Remove String    ${note_id_str}    [    ]    '    " 
@@ -693,5 +693,5 @@ Delete a note by ID via API - Unauthorizedt
     ${json_responseDN}    Convert String To Json    ${responseDN.content} 
     Should Be Equal    Access token is not valid or has expired, you will need to login    ${responseDN.json()['message']}
     Log To Console    ${responseDN.json()['message']}
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 

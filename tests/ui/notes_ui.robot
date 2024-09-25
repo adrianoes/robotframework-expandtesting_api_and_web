@@ -12,10 +12,10 @@ Library    Collections
 
 Create a new note via UI
     [Tags]    UI    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -79,17 +79,17 @@ Create a new note via UI
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
     # Log To Console    ${note_id_color}
-    Create File    tests/fixtures/testdata-${bypassParalelismNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    deleteUserViaUi(${bypassParalelismNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Create a new note via UI - Invalid title
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -118,16 +118,16 @@ Create a new note via UI - Invalid title
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[contains(.,'Create')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Create a new note via UI - Invalid description 
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber}) 
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
@@ -156,17 +156,17 @@ Create a new note via UI - Invalid description
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[contains(.,'Create')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Get all notes via UI
     [Tags]    UI    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber})
+    logInUserViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     #token us read for when we want to use api custom commands to help ui tests.
     ${user_token_data}    Get Value From Json    ${data}    $.user_token
     ${user_token_str}    Convert JSON To String	 ${user_token_data}
@@ -236,16 +236,16 @@ Get all notes via UI
             Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked    timeout=5m
         END 
     END
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via UI
     [Tags]    UI    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
-    createNoteViaUi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber})
+    logInUserViaUi(${randomNumber})
+    createNoteViaUi(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -280,16 +280,16 @@ Update an existing note via UI
     ELSE
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via UI - Invalid title
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
-    createNoteViaUi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber})
+    logInUserViaUi(${randomNumber})
+    createNoteViaUi(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -304,16 +304,16 @@ Update an existing note via UI - Invalid title
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[@data-testid='note-submit']
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update an existing note via UI - Invalid description
     [Tags]    UI    FULL    NEGATIVE 
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
-    createNoteViaUi(${bypassParalelismNumber})
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber})
+    logInUserViaUi(${randomNumber})
+    createNoteViaUi(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -328,17 +328,17 @@ Update an existing note via UI - Invalid description
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[@data-testid='note-submit']
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Update the completed status of a note via UI
     [Tags]    UI    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber})
-    logInUserViaUi(${bypassParalelismNumber})
-    createNoteViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber})
+    logInUserViaUi(${randomNumber})
+    createNoteViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
     ${note_category}    Remove String    ${note_category_str}    [    ]    '    "    
@@ -367,17 +367,17 @@ Update the completed status of a note via UI
         Log To Console    Uncheckeddddddddd
         Should Be Equal    ${note_id_color_final}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
 
 Delete a note via UI
     [Tags]    UI    BASIC    FULL
-    ${bypassParalelismNumber}    FakerLibrary.creditCardNumber
-    createUserViaUi(${bypassParalelismNumber}) 
-    logInUserViaUi(${bypassParalelismNumber}) 
-    createNoteViaUi(${bypassParalelismNumber})
-    ${data}    Load Json From File    tests/fixtures/testdata-${bypassParalelismNumber}.json
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaUi(${randomNumber}) 
+    logInUserViaUi(${randomNumber}) 
+    createNoteViaUi(${randomNumber})
+    ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
     ${note_title}    Remove String    ${note_title_str}    [    ]    '    " 
@@ -386,6 +386,6 @@ Delete a note via UI
     Click    selector=//button[@data-testid='note-delete-confirm']
     #did not work when selector is coded instead of xpath
     Get Element Count    xpath=(//div[contains(.,'${note_title}')])[12]  ==  0           
-    deleteUserViaUi(${bypassParalelismNumber})
+    deleteUserViaUi(${randomNumber})
     Close Browser
-    deleteJsonFile(${bypassParalelismNumber})
+    deleteJsonFile(${randomNumber})
