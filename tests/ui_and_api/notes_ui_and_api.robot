@@ -113,9 +113,11 @@ Create a new note via UI and API - Invalid title
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
+    ${old_timeout} =    Set Browser Timeout    timeout=5m
     Go To    https://practice.expandtesting.com/notes/app
+    Set Browser Timeout    ${old_timeout}
     Click    selector=//div[@class='page-layout']
-    Click    selector=//button[contains(.,'+ Add Note')]
+    Click    selector=//button[@data-testid='add-new-note']
     Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
         Check Checkbox    selector=//input[@data-testid='note-completed']
@@ -202,7 +204,9 @@ Get all notes via UI and API
         ${note_title}    Get From List    ${arraytitle}    ${i}
         Go To    https://practice.expandtesting.com/notes/app
         Click    selector=//div[@class='page-layout']
+        ${old_timeout} =    Set Browser Timeout    timeout=5m
         Click    selector=//button[contains(.,'+ Add Note')]
+        Set Browser Timeout    ${old_timeout} 
         Select Options By    data-testid=note-category    value    ${note_category}    
         IF    ${note_completed} == 1
             Check Checkbox    selector=//input[@data-testid='note-completed']

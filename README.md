@@ -9,12 +9,13 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | Node.js                         | 18.18.0        | -                                                               |
 | Python                          | 3.12.5         | -                                                               |
 | Visual Studio Code              | 1.89.1         | -                                                               |
-| Robot Framework                 | 7.0.1          | -                                                               | 
+| Robot Framework                 | 7.1            | -                                                               | 
 | Pabot                           | 2.18.0         | -                                                               |
-| Browser Library                 | 18.8.0         | -                                                               | 
+| Browser Library                 | 18.8.1         | -                                                               | 
 | RequestsLibrary                 | 0.9.7          | -                                                               | 
 | JSONLibrary                     | 0.5            | -                                                               | 
-| robotframework-faker            | 5.0.0          | -                                                               | 
+| robotframework-faker            | 5.0.0          | -                                                               |
+| setuptools                      | 75.1.0         | -                                                               |  
 | Robot Framework Language Server | 1.12.0         | -                                                               |
 | Chrome TruePath                 | 1.0.0          | Optional. Recommended so you can work with accurate locators.   |              
 
@@ -78,6 +79,8 @@ Check then both to add both options in context menu.
 - [Fetch From Left](https://robotframework.org/robotframework/latest/libraries/String.html#Fetch%20From%20Left)
 - [How to use Tags and Document your test #6](https://www.youtube.com/watch?v=bBnPFNOTkdQ)
 - [Running tests in parallel](https://docs.robotframework.org/docs/parallel)
+- [Browser - Timeout 10000ms on page.goto (New Page)](https://forum.robotframework.org/t/browser-timeout-10000ms-on-page-goto-new-page/825/3)
+- [How to update/upgrade a package using pip?](https://stackoverflow.com/a/47071257/10519428)
 
 # Tips:
 

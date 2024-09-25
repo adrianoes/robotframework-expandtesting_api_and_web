@@ -232,8 +232,9 @@ createNoteViaUi(${randomNumber})
     ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
-    Click    selector=//div[@class='page-layout']
-    Click    selector=//button[contains(.,'+ Add Note')]
+    ${old_timeout} =    Set Browser Timeout    timeout=5m
+    Click    selector=//button[@data-testid='add-new-note']
+    Set Browser Timeout    ${old_timeout} 
     Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
         Check Checkbox    selector=//input[@data-testid='note-completed']
