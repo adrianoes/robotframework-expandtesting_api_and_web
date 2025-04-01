@@ -1,7 +1,7 @@
 *** Settings ***
 
 Resource    ../resources/test.resource
-Library    Browser     
+Library    Browser 
 Library    JSONLibrary
 Library    OperatingSystem
 Library    String
@@ -10,11 +10,11 @@ Library    Collections
 
 *** Test Cases ***
 
-Create a new note via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Create a new note via WEB
+    [Tags]    WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -28,9 +28,6 @@ Create a new note via UI and API
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    ${user_token_data}    Get Value From Json    ${data}    $.user_token
-    ${user_token_str}    Convert JSON To String	 ${user_token_data}
-    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
@@ -38,7 +35,9 @@ Create a new note via UI and API
     ${note_title}    FakerLibrary.Sentence    nb_words=3
     Go To    https://practice.expandtesting.com/notes/app
     Click    selector=//div[@class='page-layout']
-    Click    selector=//button[contains(.,'+ Add Note')]
+    ${old_timeout} =    Set Browser Timeout    timeout=5m
+    Click    selector=//button[@data-testid='add-new-note']
+    Set Browser Timeout    ${old_timeout} 
     Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
         Check Checkbox    selector=//input[@data-testid='note-completed']
@@ -82,16 +81,16 @@ Create a new note via UI and API
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
     # Log To Console    ${note_id_color}
-    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
-    deleteUserViaApi(${randomNumber})
+    Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Create a new note via UI and API - Invalid title
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Create a new note via WEB - Invalid title
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -105,19 +104,14 @@ Create a new note via UI and API - Invalid title
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    ${user_token_data}    Get Value From Json    ${data}    $.user_token
-    ${user_token_str}    Convert JSON To String	 ${user_token_data}
-    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=4
     ${note_title}    FakerLibrary.Sentence    nb_words=3
-    ${old_timeout} =    Set Browser Timeout    timeout=5m
     Go To    https://practice.expandtesting.com/notes/app
-    Set Browser Timeout    ${old_timeout}
     Click    selector=//div[@class='page-layout']
-    Click    selector=//button[@data-testid='add-new-note']
+    Click    selector=//button[contains(.,'+ Add Note')]
     Select Options By    data-testid=note-category    value    ${note_category}    
     IF    ${note_completed} == 1
         Check Checkbox    selector=//input[@data-testid='note-completed']
@@ -126,15 +120,15 @@ Create a new note via UI and API - Invalid title
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[contains(.,'Create')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Create a new note via UI and API - Invalid description
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Create a new note via WEB - Invalid description 
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -148,9 +142,6 @@ Create a new note via UI and API - Invalid description
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    ${user_token_data}    Get Value From Json    ${data}    $.user_token
-    ${user_token_str}    Convert JSON To String	 ${user_token_data}
-    ${user_token}    Remove String    ${user_token_str}    [    ]    '    " 
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     #Number of clicks in the Completed checkbox
     ${note_completed}    FakerLibrary.Random Int    1    2    1
@@ -167,15 +158,15 @@ Create a new note via UI and API - Invalid description
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[contains(.,'Create')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Get all notes via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Get all notes via WEB
+    [Tags]    WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber})
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     #token us read for when we want to use api custom commands to help ui tests.
@@ -204,9 +195,7 @@ Get all notes via UI and API
         ${note_title}    Get From List    ${arraytitle}    ${i}
         Go To    https://practice.expandtesting.com/notes/app
         Click    selector=//div[@class='page-layout']
-        ${old_timeout} =    Set Browser Timeout    timeout=5m
         Click    selector=//button[contains(.,'+ Add Note')]
-        Set Browser Timeout    ${old_timeout} 
         Select Options By    data-testid=note-category    value    ${note_category}    
         IF    ${note_completed} == 1
             Check Checkbox    selector=//input[@data-testid='note-completed']
@@ -249,16 +238,16 @@ Get all notes via UI and API
             Wait For Elements State    selector=(//input[@type='checkbox'])[${i}]    state=unchecked    timeout=5m
         END 
     END
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update an existing note via WEB
+    [Tags]    WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
-    createNoteViaUi(${randomNumber})
+    createUserViaWeb(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    createNoteViaWeb(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -293,16 +282,16 @@ Update an existing note via UI and API
     ELSE
         Should Be Equal    ${note_id_color}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via UI and API - Invalid title
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update an existing note via WEB - Invalid title
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
-    createNoteViaUi(${randomNumber})
+    createUserViaWeb(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    createNoteViaWeb(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -317,16 +306,16 @@ Update an existing note via UI and API - Invalid title
     Fill Text    selector=//textarea[@data-testid='note-description']    txt=${note_description}
     Click    selector=//button[@data-testid='note-submit']
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Title should be between 4 and 100 characters')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via UI and API - Invalid description
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update an existing note via WEB - Invalid description
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
-    createNoteViaUi(${randomNumber})
+    createUserViaWeb(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    createNoteViaWeb(${randomNumber})
     ${note_category}    FakerLibrary.Random Element    elements=("Home", "Personal", "Work")
     ${note_completed}    FakerLibrary.Random Int    1    2    1
     ${note_description}    FakerLibrary.Sentence    nb_words=5
@@ -341,16 +330,16 @@ Update an existing note via UI and API - Invalid description
     Fill Text    selector=//textarea[@data-testid='note-description']    txt='e'
     Click    selector=//button[@data-testid='note-submit']
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Description should be between 4 and 1000 characters')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update the completed status of a note via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update the completed status of a note via WEB
+    [Tags]    WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
-    createNoteViaUi(${randomNumber})
+    createUserViaWeb(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    createNoteViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_category_data}    Get Value From Json    ${data}    $.note_category
     ${note_category_str}    Convert JSON To String	 ${note_category_data}
@@ -380,16 +369,16 @@ Update the completed status of a note via UI and API
         Log To Console    Uncheckeddddddddd
         Should Be Equal    ${note_id_color_final}    background-color: rgb(92, 107, 192); color: rgb(255, 255, 255);
     END 
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Delete a note via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Delete a note via WEB
+    [Tags]    WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber}) 
-    createNoteViaUi(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber}) 
+    createNoteViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${note_title_data}    Get Value From Json    ${data}    $.note_title
     ${note_title_str}    Convert JSON To String	 ${note_title_data}
@@ -399,6 +388,6 @@ Delete a note via UI and API
     Click    selector=//button[@data-testid='note-delete-confirm']
     #did not work when selector is coded instead of xpath
     Get Element Count    xpath=(//div[contains(.,'${note_title}')])[12]  ==  0           
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})

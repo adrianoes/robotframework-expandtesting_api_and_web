@@ -9,8 +9,8 @@ Library    FakerLibrary
 
 *** Test Cases ***
 
-Creates a new user account via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Creates a new user account via WEB
+    [Tags]    WEB    BASIC    FULL 
     ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
@@ -39,15 +39,60 @@ Creates a new user account via UI and API
     # Log To Console      ${user_id}
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
-    logInUserViaApi(${randomNumber})
-    deleteUserViaApi(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Creates a new user account via WEB - Invalid e-mail
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
+    ${random_email}    FakerLibrary.Email
+    ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
+    ${user_name}    FakerLibrary.Name
+    ${user_password}    FakerLibrary.password
+    New Browser    headless=True    
+    #When headless, use the line above and not the 2 lines below
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    timeout=5m
+    New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
+    Fill Text    selector=//input[@id='email']    txt='@'+${user_email}
+    Fill Text    selector=//input[@name='name']    txt=${user_name}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Fill Text    selector=//input[@name='confirmPassword']    txt=${user_password}
+    Click    selector=//button[contains(.,'Register')]
+    Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'A valid email address is required')]    state=visible    timeout=5m
+
+Creates a new user account via WEB - Wrong password
+    [Tags]    WEB    FULL    NEGATIVE 
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    ${random_letter}    FakerLibrary.Random Lowercase Letter
+    ${random_email}    FakerLibrary.Email
+    ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
+    ${user_name}    FakerLibrary.Name
+    ${user_password}    FakerLibrary.password
+    New Browser    headless=True    
+    #When headless, use the line above and not the 2 lines below
+    # New Browser    headless=False    args=["--start-maximized"]
+    # New Context    viewport=${None}
+    ${old_timeout} =    Set Browser Timeout    timeout=5m
+    New Page    https://practice.expandtesting.com/notes/app/register
+    Set Browser Timeout    ${old_timeout} 
+    Fill Text    selector=//input[@id='email']    txt=${user_email}
+    Fill Text    selector=//input[@name='name']    txt=${user_name}
+    Fill Text    selector=//input[@id='password']    txt=${user_password}
+    Fill Text    selector=//input[@name='confirmPassword']    txt='e'+${user_password}
+    Click    selector=//button[contains(.,'Register')]
+    Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Passwords don')]    state=visible    timeout=5m
+
+
+Log in as an existing user via WEB
+    [Tags]    WEB    BASIC    FULL 
+    ${randomNumber}    FakerLibrary.creditCardNumber
+    createUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -61,13 +106,7 @@ Log in as an existing user via UI and API
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    New Browser    headless=True    
-    #When headless, use the line above and not the 2 lines below
-    # New Browser    headless=False    args=["--start-maximized"]
-    # New Context    viewport=${None}
-    ${old_timeout} =    Set Browser Timeout    timeout=5m
-    New Page    https://practice.expandtesting.com/notes/app/login
-    Set Browser Timeout    ${old_timeout} 
+    Go To    https://practice.expandtesting.com/notes/app/login
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
@@ -77,81 +116,57 @@ Log in as an existing user via UI and API
     # ${user_id}    Get Attribute    selector=//input[@data-testid='user-id']    attribute=value    
     ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via UI and API - Wrong password 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Log in as an existing user via WEB - Wrong password
+    [Tags]    WEB    FULL    NEGATIVE  
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
+    createUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
-    ${user_id_data}    Get Value From Json    ${data}    $.user_id
-    ${user_id_str}    Convert JSON To String	 ${user_id_data}
-    ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
-    ${user_name_data}    Get Value From Json    ${data}    $.user_name
-    ${user_name_str}    Convert JSON To String	 ${user_name_data}
-    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    New Browser    headless=True    
-    #When headless, use the line above and not the 2 lines below
-    # New Browser    headless=False    args=["--start-maximized"]
-    # New Context    viewport=${None}
-    ${old_timeout} =    Set Browser Timeout    timeout=5m
-    New Page    https://practice.expandtesting.com/notes/app/login
-    Set Browser Timeout    ${old_timeout}
+    Go To    https://practice.expandtesting.com/notes/app/login
     Fill Text    selector=//input[@id='email']    txt=${user_email}
     Fill Text    selector=//input[@id='password']    txt='e'+${user_password}
     Click    selector=//button[contains(.,'Login')]
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Incorrect email address or password')]    state=visible    timeout=5m
-    logInUserViaApi(${randomNumber})
-    deleteUserViaApi(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via UI and API - Invalid e-mail 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Log in as an existing user via WEB - Invalid e-mail 
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
+    createUserViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
     ${user_email}    Remove String    ${user_email_str}    [    ]    '    " 
-    ${user_id_data}    Get Value From Json    ${data}    $.user_id
-    ${user_id_str}    Convert JSON To String	 ${user_id_data}
-    ${user_id}    Remove String    ${user_id_str}    [    ]    '    " 
-    ${user_name_data}    Get Value From Json    ${data}    $.user_name
-    ${user_name_str}    Convert JSON To String	 ${user_name_data}
-    ${user_name}    Remove String    ${user_name_str}    [    ]    '    " 
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
     ${user_password}    Remove String    ${user_password_str}    [    ]    '    "
-    New Browser    headless=True    
-    #When headless, use the line above and not the 2 lines below
-    # New Browser    headless=False    args=["--start-maximized"]
-    # New Context    viewport=${None}
-    ${old_timeout} =    Set Browser Timeout    timeout=5m
-    New Page    https://practice.expandtesting.com/notes/app/login
-    Set Browser Timeout    ${old_timeout}
+    Go To    https://practice.expandtesting.com/notes/app/login
     Fill Text    selector=//input[@id='email']    txt='@'+${user_email}
     Fill Text    selector=//input[@id='password']    txt=${user_password}
     Click    selector=//button[contains(.,'Login')]
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'A valid email address is required')]    state=visible    timeout=5m
-    logInUserViaApi(${randomNumber})
-    deleteUserViaApi(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Retrieve user profile information via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Retrieve user profile information via WEB
+    [Tags]    WEB    BASIC    FULL 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})    
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -164,15 +179,15 @@ Retrieve user profile information via UI and API
     ${user_name_profile}    Get Attribute    selector=//input[@data-testid='user-name']    attribute=value
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${user_name}    ${user_name_profile}
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update user profile information via WEB
+    [Tags]    WEB    BASIC    FULL 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -180,7 +195,7 @@ Update user profile information via UI and API
     ${updated_user_company}    FakerLibrary.Company
     ${updated_user_name}    FakerLibrary.Name
     ${updated_user_phone_int}    FakerLibrary.Random Int    min=10000000    max=99999999999999999999    step=1  
-    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}    
+    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}
     Fill Text    selector=//input[@data-testid='user-company']    txt=${updated_user_company}
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
@@ -194,15 +209,15 @@ Update user profile information via UI and API
     Should Be Equal    ${user_email}    ${user_email_profile}
     Should Be Equal    ${updated_user_name}    ${user_name_profile}
     Should Be Equal    ${updated_user_phone}    ${user_phone_profile}
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via UI and API - Invalid company name
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update user profile information via WEB - Invalid company name
+    [Tags]    WEB    FULL    NEGATIVE  
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -210,21 +225,21 @@ Update user profile information via UI and API - Invalid company name
     ${updated_user_company}    FakerLibrary.Company
     ${updated_user_name}    FakerLibrary.Name
     ${updated_user_phone_int}    FakerLibrary.Random Int    min=10000000    max=99999999999999999999    step=1  
-    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}    
+    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}
     Fill Text    selector=//input[@data-testid='user-company']    txt='e'
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'company name should be between 4 and 30 characters')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via UI and API - Invalid phone number
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update user profile information via WEB - Invalid phone number 
+    [Tags]    WEB    FULL    NEGATIVE  
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -232,21 +247,21 @@ Update user profile information via UI and API - Invalid phone number
     ${updated_user_company}    FakerLibrary.Company
     ${updated_user_name}    FakerLibrary.Name
     ${updated_user_phone_int}    FakerLibrary.Random Int    min=1    max=2    step=1  
-    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}    
+    ${updated_user_phone}    Convert To String    ${updated_user_phone_int}
     Fill Text    selector=//input[@data-testid='user-company']    txt='e'
     Fill Text    selector=//input[@data-testid='user-name']    txt=${updated_user_name}
     Fill Text    selector=//input[@data-testid='user-phone']    txt=${updated_user_phone}
     Click    selector=//button[contains(.,'Update profile')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Phone number should be between 8 and 20 digits')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Change a user\'s password via UI and API 
-    [Tags]    UI_AND_API    BASIC    FULL
+Change a user\'s password via WEB 
+    [Tags]    WEB    BASIC    FULL 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
@@ -259,15 +274,15 @@ Change a user\'s password via UI and API
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_new_password}
     Click    selector=//button[contains(.,'Update password')]
     Wait For Elements State    selector=//div[@class='d-flex'][contains(.,'The password was successfully updated')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Change a user\'s password via UI and API - Type same password 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Change a user\'s password via WEB - Type same password
+    [Tags]    WEB    FULL    NEGATIVE 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_password_data}    Get Value From Json    ${data}    $.user_password
     ${user_password_str}    Convert JSON To String	 ${user_password_data}
@@ -280,28 +295,28 @@ Change a user\'s password via UI and API - Type same password
     Fill Text    selector=//input[contains(@data-testid,'confirm-password')]    txt=${user_password}
     Click    selector=//button[contains(.,'Update password')]
     Wait For Elements State    selector=//div[@class='invalid-feedback'][contains(.,'Passwords don')]    state=visible    timeout=5m
-    deleteUserViaApi(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log out a user via UI and API 
-    [Tags]    UI_AND_API    BASIC    FULL
+Log out a user via WEB
+    [Tags]    WEB    BASIC    FULL  
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Logout')]
     Wait For Elements State    selector=//a[contains(.,'Login')]    state=visible    timeout=5m
-    logInUserViaApi(${randomNumber})
-    deleteUserViaApi(${randomNumber})
+    logInUserViaWeb(${randomNumber})
+    deleteUserViaWeb(${randomNumber})
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Delete user account via UI and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Delete user account via WEB
+    [Tags]    WEB    BASIC    FULL 
     ${randomNumber}    FakerLibrary.creditCardNumber
-    createUserViaApi(${randomNumber}) 
-    logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+    createUserViaWeb(${randomNumber}) 
+    logInUserViaWeb(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']

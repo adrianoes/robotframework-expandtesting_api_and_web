@@ -148,7 +148,7 @@ createNoteViaApi(${randomNumber})
     Log To Console    ${responseCN.json()['message']}
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_id":"${user_id}","user_token":"${user_token}"}
 
-logInUserViaUi(${randomNumber})
+logInUserViaWeb(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -173,14 +173,13 @@ logInUserViaUi(${randomNumber})
     ${user_token}    LocalStorage Get Item   key=token 
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
-deleteUserViaUi(${randomNumber})
+deleteUserViaWeb(${randomNumber})
     Go To    https://practice.expandtesting.com/notes/app/profile
     Click    selector=//button[contains(.,'Delete Account')]
     Click    selector=//button[@data-testid='note-delete-confirm']
     Wait For Elements State    selector=//div[@data-testid='alert-message'][contains(.,'Your account has been deleted. You should create a new account to continue.')]    state=visible    timeout=5m
 
- 
-createUserViaUi(${randomNumber}) 
+createUserViaWeb(${randomNumber}) 
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
     ${user_email}    Catenate    SEPARATOR=    ${random_letter}    ${random_email}
@@ -209,7 +208,7 @@ createUserViaUi(${randomNumber})
     Wait For Elements State    selector=//b[contains(.,'User account created successfully')]    state=visible    timeout=5m
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}"}
 
-createNoteViaUi(${randomNumber}) 
+createNoteViaWeb(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}
@@ -280,7 +279,7 @@ createNoteViaUi(${randomNumber})
     # Log To Console    ${note_id_color}
     Create File    tests/fixtures/testdata-${randomNumber}.json	{"note_category":"${note_category}","note_completed":"${note_completed}","note_description":"${note_description}","note_id":"${note_id}","note_title":"${note_title}","user_email":"${user_email}","user_id":"${user_id}","user_name":"${user_name}","user_password":"${user_password}","user_token":"${user_token}"}
 
-logInUserViaUi_when_user_was_created_via_api(${randomNumber})
+logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
     ${user_email_data}    Get Value From Json    ${data}    $.user_email
     ${user_email_str}    Convert JSON To String	 ${user_email_data}

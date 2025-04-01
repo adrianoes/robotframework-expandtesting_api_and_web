@@ -1,6 +1,6 @@
-# robot-expandtesting_UI_and_API
+# robotframework-expandtesting_web_and_api
 
-UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/app/) note app. This project contains basic examples on how to use Robot Framework to test UI, API and how to combine UI and API tests. Good practices such as hooks, custom commands and tags, among others, are used. All the necessary support documentation to develop this project is placed here. When it comes to the API part, it deals with the x-www-form-urlencoded content type. Although custom commands are used, the assertion code to each test is kept in it so we can work independently in each test. It creates one .json file for each test so we can share data between different requests in the test. The .json file is excluded after each test execution. 
+WEB and API testing in [expandtesting](https://practice.expandtesting.com/notes/app/) note app. This project contains basic examples on how to use Robot Framework to test WEB, API and how to combine WEB and API tests. Good practices such as hooks, custom commands and tags, among others, are used. All the necessary support documentation to develop this project is placed here. When it comes to the API part, it deals with the x-www-form-urlencoded content type. Although custom commands are used, the assertion code to each test is kept in it so we can work independently in each test. It creates one .json file for each test so we can share data between different requests in the test. The .json file is excluded after each test execution. 
 
 # Pre-requirements:
 
@@ -11,7 +11,7 @@ UI and API testing in [expandtesting](https://practice.expandtesting.com/notes/a
 | Visual Studio Code              | 1.89.1         | -                                                               |
 | Robot Framework                 | 7.1            | -                                                               | 
 | Pabot                           | 2.18.0         | -                                                               |
-| Browser Library                 | 18.8.1         | -                                                               | 
+| Browser Library                 | 19.4.0         | -                                                               | 
 | RequestsLibrary                 | 0.9.7          | -                                                               | 
 | JSONLibrary                     | 0.5            | -                                                               | 
 | robotframework-faker            | 5.0.0          | -                                                               |
@@ -43,13 +43,13 @@ Check then both to add both options in context menu.
 # Tests:
 
 - Execute ```robot -d ./results tests``` to run all tests in headless mode and store results in separated folder.
-- Execute ```robot -d ./results .\tests\ui\users_ui.robot``` to run all the tests in the users_ui.robot suite in headless mode and store results in separated folder.
-- Execute ```robot -d ./results -t "Change a user\'s password via UI" tests/ui/users_ui.robot``` to run Change a user's password via UI test case inside users_ui.robot suite and store results in separated folder.
+- Execute ```robot -d ./results .\tests\web\users_web.robot``` to run all the tests in the users_web.robot suite in headless mode and store results in separated folder.
+- Execute ```robot -d ./results -t "Change a user\'s password via WEB" tests/web/users_web.robot``` to run Change a user's password via WEB test case inside users_web.robot suite and store results in separated folder.
 - Hit :point_right:**Testing** button on left side bar in VSC and choose the tests you want to execute.
 - Execute ```robot -d results -i BASIC tests``` to run the tests tagged with API tag and store results in separated folder.
-- Execute ```robot -d results -e UI -e NEGATIVE .\tests\api\notes_ui.robot``` to run all the tests but the ones tagged with UI, NEGATIVE or both tags inside notes_ui.robot suite and store results in separated folder.
+- Execute ```robot -d results -e WEB -e NEGATIVE .\tests\api\notes_web.robot``` to run all the tests but the ones tagged with WEB, NEGATIVE or both tags inside notes_web.robot suite and store results in separated folder.
 - Execute ```robot -d results -i API -i FULL .\tests\api\users_api.robot``` to run all the tests tagged with API, FULL or both tags inside users_api.robot suite and store results in separated folder.
-- Execute ```robot -d results -i UI_AND_API .\tests\api\users_ui_and_api.robot``` to run all the tests tagged with UI_AND_API inside users_ui_and_api.robot suite and store results in separated folder.
+- Execute ```robot -d results -i WEB_AND_API .\tests\api\users_web_and_api.robot``` to run all the tests tagged with WEB_AND_API inside users_web_and_api.robot suite and store results in separated folder.
 - Execute ```pabot --testlevelsplit tests``` to run all tests in parallel and headless mode.
 - Execute ```pabot --processes 8 tests``` to run all tests in parallel according to each execution splited in 8 CPU cores which will execute 8 processes at time and headless mode.
 
@@ -84,7 +84,7 @@ Check then both to add both options in context menu.
 
 # Tips:
 
-- UI and API tests to send password reset link to user's email and API tests to verify a password reset token and reset a user's password must be tested manually as they rely on e-mail verification.
+- WEB and API tests to send password reset link to user's email and API tests to verify a password reset token and reset a user's password must be tested manually as they rely on e-mail verification.
 - Pabot documentation has some interesting tricks. Have a look!
 - Configure a reasonable timeout and use Scroll To Element in the assertions that allows you to do so.   
 - Faker e-mail keyword has presented repeated e-mails and related test fails with 409 code (conflict). Random lowercase letters were added to workaround.   
