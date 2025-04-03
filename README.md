@@ -49,7 +49,7 @@ Check then both to add both options in context menu.
 - Execute ```robot -d results -i BASIC tests``` to run the tests tagged with API tag and store results in separated folder.
 - Execute ```robot -d results -e WEB -e NEGATIVE .\tests\api\notes_web.robot``` to run all the tests but the ones tagged with WEB, NEGATIVE or both tags inside notes_web.robot suite and store results in separated folder.
 - Execute ```robot -d results -i API -i FULL .\tests\api\users_api.robot``` to run all the tests tagged with API, FULL or both tags inside users_api.robot suite and store results in separated folder.
-- Execute ```robot -d results -i API_AND_WEB .\tests\api\users_web_and_api.robot``` to run all the tests tagged with WEB_AND_API inside users_web_and_api.robot suite and store results in separated folder.
+- Execute ```robot -d results -i API_AND_WEB .\tests\api\users_web_and_api.robot``` to run all the tests tagged with API_AND_WEB inside users_web_and_api.robot suite and store results in separated folder.
 - Execute ```pabot --testlevelsplit tests``` to run all tests in parallel and headless mode.
 - Execute ```pabot --processes 8 tests``` to run all tests in parallel according to each execution splited in 8 CPU cores which will execute 8 processes at time and headless mode.
 
