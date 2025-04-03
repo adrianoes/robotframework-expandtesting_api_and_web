@@ -9,8 +9,8 @@ Library    FakerLibrary
 
 *** Test Cases ***
 
-Creates a new user account via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Creates a new user account via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     ${random_letter}    FakerLibrary.Random Lowercase Letter
     ${random_email}    FakerLibrary.Email
@@ -44,8 +44,8 @@ Creates a new user account via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Log in as an existing user via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
@@ -81,8 +81,8 @@ Log in as an existing user via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via WEB and API - Wrong password 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Log in as an existing user via API and WEB - Wrong password 
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
@@ -114,8 +114,8 @@ Log in as an existing user via WEB and API - Wrong password
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log in as an existing user via WEB and API - Invalid e-mail 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Log in as an existing user via API and WEB - Invalid e-mail 
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     ${data}    Load Json From File    tests/fixtures/testdata-${randomNumber}.json
@@ -147,8 +147,8 @@ Log in as an existing user via WEB and API - Invalid e-mail
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Retrieve user profile information via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Retrieve user profile information via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})    
@@ -168,8 +168,8 @@ Retrieve user profile information via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update user profile information via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -198,8 +198,8 @@ Update user profile information via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via WEB and API - Invalid company name
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update user profile information via API and WEB - Invalid company name
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -220,8 +220,8 @@ Update user profile information via WEB and API - Invalid company name
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update user profile information via WEB and API - Invalid phone number
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update user profile information via API and WEB - Invalid phone number
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -242,8 +242,8 @@ Update user profile information via WEB and API - Invalid phone number
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Change a user\'s password via WEB and API 
-    [Tags]    UI_AND_API    BASIC    FULL
+Change a user\'s password via API and WEB 
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -263,8 +263,8 @@ Change a user\'s password via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Change a user\'s password via WEB and API - Type same password 
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Change a user\'s password via API and WEB - Type same password 
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -284,8 +284,8 @@ Change a user\'s password via WEB and API - Type same password
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Log out a user via WEB and API 
-    [Tags]    UI_AND_API    BASIC    FULL
+Log out a user via API and WEB 
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -297,8 +297,8 @@ Log out a user via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Delete user account via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Delete user account via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})

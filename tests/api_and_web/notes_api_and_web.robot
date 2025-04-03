@@ -10,8 +10,8 @@ Library    Collections
 
 *** Test Cases ***
 
-Create a new note via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Create a new note via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -87,8 +87,8 @@ Create a new note via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Create a new note via WEB and API - Invalid title
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Create a new note via API and WEB - Invalid title
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -130,8 +130,8 @@ Create a new note via WEB and API - Invalid title
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Create a new note via WEB and API - Invalid description
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Create a new note via API and WEB - Invalid description
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -171,8 +171,8 @@ Create a new note via WEB and API - Invalid description
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Get all notes via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Get all notes via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -253,8 +253,8 @@ Get all notes via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update an existing note via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -297,8 +297,8 @@ Update an existing note via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via WEB and API - Invalid title
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update an existing note via API and WEB - Invalid title
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -321,8 +321,8 @@ Update an existing note via WEB and API - Invalid title
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update an existing note via WEB and API - Invalid description
-    [Tags]    UI_AND_API    FULL    NEGATIVE
+Update an existing note via API and WEB - Invalid description
+    [Tags]    API_AND_WEB    FULL    NEGATIVE
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -345,8 +345,8 @@ Update an existing note via WEB and API - Invalid description
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Update the completed status of a note via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Update the completed status of a note via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber})
@@ -384,8 +384,8 @@ Update the completed status of a note via WEB and API
     Close Browser
     deleteJsonFile(${randomNumber})
 
-Delete a note via WEB and API
-    [Tags]    UI_AND_API    BASIC    FULL
+Delete a note via API and WEB
+    [Tags]    API_AND_WEB    BASIC    FULL
     ${randomNumber}    FakerLibrary.creditCardNumber
     createUserViaApi(${randomNumber}) 
     logInUserViaWeb_when_user_was_created_via_api(${randomNumber}) 
